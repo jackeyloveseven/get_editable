@@ -514,18 +514,43 @@ complementary rather than one strictly subsuming the other.
   production-ready** — Section 4.3's held-out validation shows an 82%
   composition-defect rate (collaged/tiled sub-images), collapsing its
   usable-output rate to 15% despite a higher raw identity-match rate than
-  the recommended baseline. The mechanistic explanation in Section 3.3-3.4
-  for *why* widening the band and frequency-gating together improves
-  identity match still holds — the open problem is that this same change
-  also destabilizes composition, and we do not yet have a fix. The most
-  likely next step (not attempted here, to avoid re-tuning against the now-
-  contaminated holdout30 set per this work's own contamination-avoidance
-  protocol) is a fresh probe set to test whether a narrower widened band, a
-  lower `w`, or an explicit composition-consistency loss/rejection sampling
-  step removes the defect without giving back the identity-match gain.
+  the recommended baseline. **Follow-up (2026-07-16,
+  `probe/62_widerband_decompose.py`): the most likely candidate fix —
+  strip the position-encoding out of the widened band entirely (`strip` at
+  band 10-25, matching `lowfreq`'s width but none of its position
+  information) — was tested on a 12-subject dev set (2 seeds × 3 arms,
+  same joint identity+defect judge) and does NOT work. `strip` at the wide
+  band shows 75% defect, statistically indistinguishable from `lowfreq`'s
+  71% on the same dev set; the identity gain from widening (29%→50%
+  same_character=yes) is itself not significant at this n=24 (Wilson CIs
+  heavily overlap). The defect is not caused by position-encoding
+  precision — it is caused by injecting reference content into layers
+  10-20 at all, position-encoded or not. This matches an earlier, purely
+  qualitative signal (`README.md`'s E4 ablation, 2 subjects, pre-dates the
+  defect-aware judge) that this same layer range is harmful under plain
+  content injection ("10-29 over-injected"). We now treat this as a clean
+  negative result rather than an open problem: the identity gain from
+  widening the band and the composition damage it causes are not separable
+  through the position-encoding channel, in any variant tested here. No
+  further tuning was attempted along this axis — the dev-set numbers above
+  are diagnostic only, and this recipe was never re-validated on
+  holdout30, since the dev-set result already rules it out as a fix.**
 - Geometric attributes (face shape, eye shape) remain a residual failure
   mode for the *recommended* (`strip`) recipe even where composition is
   fine — the `partial` rate stays 45% on held-out data.
+- **Exploratory: a cheap, judge-free composition-defect proxy was tested
+  and only partially holds.** Spectral flatness (Wiener entropy) of the
+  generated image — periodic/tiled content concentrates FFT energy in
+  narrow bands, natural content spreads it broadly, following a lead from
+  a different DiT artifact literature (SEGA, resolution-extrapolation
+  tiling, not reference-injection) — correlates with this project's
+  judge-labeled `visible_defect` on the 72-image widerband decomposition
+  set (point-biserial r=-0.49, 76% best-threshold separability vs a 63%
+  naive baseline) but far more weakly on a second, smaller, differently-
+  judged set (r=-0.21, 58% vs a 55% naive baseline, `probe/63_spectral_
+  flatness_predictor.py`). Reported as a preliminary, inconsistent signal
+  worth a future dedicated study, not a validated replacement for VLM
+  judging.
 - Marginal (identity-only) metrics measured without a matched defect check
   are demonstrated in this work to be actively misleading for ranking
   recipes in this method family (Section 4.3) — any future ablation in this
@@ -672,8 +697,14 @@ IP-Adapter's is lowest at 15%), so even the strongest baseline available
 does not close the problem this paper set out to address on every axis at
 once. Geometric attributes (face/eye shape) are the dominant residual
 failure even for the recommended recipe, and the frequency-gated
-mechanism's composition-defect mode is unexplained and unfixed. All three
-are concrete, well-scoped next steps for future work on a fresh,
+mechanism's composition-defect mode, while no longer unexplained — a
+follow-up decomposition (Section 5) rules out position-encoding precision
+as the cause and points to reference-content injection into early/mid
+layers itself — remains unfixed: stripping position information from the
+widened band does not recover clean composition, so the identity gain and
+the defect it causes are not separable through that channel. Both
+geometric attributes and a working fix for the wide-band defect mode are
+concrete, well-scoped next steps for future work on a fresh,
 uncontaminated probe set, not incremental tuning of the sets already used
 to produce the numbers in this draft.
 
