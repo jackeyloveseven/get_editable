@@ -1,0 +1,53 @@
+\section{Limitations}\label{sec:limits}
+
+\texttt{lowfreq} (band 10--25) is \textbf{not production-ready}: 82\%
+held-out defect rate collapses usable-output to 15\% despite a higher
+raw identity-match rate; \emph{why} widening the band and
+frequency-gating together destabilize composition is unexplained.
+Geometric attributes (face/eye shape) remain a residual failure for the
+recommended (\texttt{strip}) recipe even where composition is clean
+(45\% partial rate). The frequency-gating sweet spot ($k{=}8$) and band
+width (10--25) were tuned on a 10-subject dev set using a metric later
+shown insufficient; re-tuning on a fresh, disjoint probe set is future
+work, as are AnimeAdapter and FreeGraftor/UNO baselines (no public
+weights / gated dependency).
+
+For the training-light mechanism, $n{=}60$ is 30 subjects $\times$ 2
+seeds, not 60 independent draws; we report subject-clustered CIs where
+this matters most above but a full re-audit is future work. The
+defect-gradient spot-check was 3 of 17 flagged cases,
+selected for clarity of the judge's note, not randomly -- it rules out
+``pure judge noise'' but not ``100\% of flags are real.'' Absolute
+numbers are modest regardless of arm: 55\% clean-usable / 21.7\%
+clean-yes is not state-of-the-art accuracy in either line of this work;
+the contribution is the evaluation-methodology finding and the honest
+ablation record.
+
+\section{Conclusion}\label{sec:conclusion}
+
+We activated a frozen, pure-T2I anime diffusion transformer as a
+reference-conditioned identity generator with two independent, cheap
+mechanisms -- zero-training attention KV injection and a
+0.06\%-parameter band-LoRA -- and found the same blind spot twice.
+Identity-match rate, the metric either mechanism's natural ablation would
+reach for first, is not merely incomplete but actively misleading: a
+training-free recipe with a higher raw identity-match rate has a
+held-out composition-defect rate 4$\times$ higher than its predecessor,
+and a training-light ablation finds identity-match flat across every
+tested layer position while the same positions differ 8.6$\times$ on
+defect rate. Neither mechanism beats a same-class
+baseline on any metric -- \texttt{strip} is statistically tied with
+IP-Adapter on strict identity accuracy at zero training cost, and the
+band-LoRA reaches krea2-identity-edit's usable-output rate at 0.06\% of
+its parameter count and a fraction of its base-model size -- and we
+report both ties as ties, not wins. What remains open: the
+frequency-gated mechanism's composition-collapse mode is unexplained and
+unfixed; geometric-attribute fidelity is a residual failure even for the
+recommended recipe; and the training-light mechanism's own defect
+gradient, while CI-decisive, is characterized on a modest qualitative
+sample. We report the pre-registered null result on the ablation this
+project was originally designed around because reporting only the
+finding that survived would misrepresent what
+the evidence actually supports -- and because the null result is what
+made the more specific, more useful defect-gradient finding visible in
+the first place.

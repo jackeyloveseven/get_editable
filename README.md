@@ -26,6 +26,12 @@ can be reviewed/edited without the full project checkout.
 - `data/` — a snapshot of every `data/*.json`/`.jsonl` file any number or
   table cell in the above traces back to, with its own `README.md` mapping
   file → what it backs → where it's cited.
+- `aaai_latex_submission/` — the compilable AAAI-27 LaTeX source (ports
+  `draft_v0.md` + `section_trainlight_band_ablation.md` into
+  `main_aaai.tex` + `aaai_draft/*.tex`, both mechanisms in one submission
+  under the stronger locked-thesis framing). Compiles to exactly 7 pages
+  of body + 1 page of references — AAAI-27's hard cap. Includes the
+  already-compiled `main_aaai.pdf`.
 
 ## Provenance
 

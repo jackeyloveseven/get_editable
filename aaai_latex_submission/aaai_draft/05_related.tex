@@ -1,0 +1,52 @@
+\section{Related Work}\label{sec:related}
+
+\paragraph{Training-free attention/KV injection.} MasaCtrl
+\citep{cao2023masactrl}, Cross-Image Attention \citep{alaluf2023crossimage},
+StyleAligned \citep{hertz2023stylealigned}, ConsiStory
+\citep{tewel2024consistory}, FreeCus \citep{zhang2025freecus}, Personalize
+Anything \citep{feng2025personalizeanything}, and FreeGraftor
+\citep{yao2025freegraftor} all report the failure mode we do -- reference
+layout leaking into the target -- and patch it differently: layer
+restriction, AdaIN, correspondence warping, zero-position concatenation,
+coordinate rebinding. All but the last two target real-photo UNets/DiTs;
+to our knowledge we are the first to apply this family to a \emph{pure
+anime T2I DiT}.
+
+\paragraph{Trained adapters.} IP-Adapter \citep{ye2023ipadapter} (our
+baseline below), PhotoMaker \citep{li2023photomaker},
+and InstantID \citep{wang2024instantid} condition on a pooled image
+embedding; AnimeAdapter \citep{han2026animeadapter}, the only
+anime-native zero-shot method we found, has no public weights. We also
+run \texttt{krea2-identity-edit} (community LoRA, 12.9B general-domain
+Krea-2-Turbo) as a second baseline: it injects the source latent as a
+RoPE frame-1 in-context token rather than a pooled embedding.
+
+\paragraph{RoPE position manipulation.} OminiControl
+\citep{tan2024ominicontrol}, UNO \citep{wu2025uno}, EasyControl
+\citep{zhang2025easycontrol}, and FLUX.1 Kontext
+\citep{blackforest2025fluxkontext} all offset or strip RoPE from
+conditioning tokens -- close to folk knowledge for DiTs by 2026.
+Untwisting RoPE \citep{mikaeili2026untwisting} is the closest neighbor to
+our frequency-gating idea but scales frequencies continuously rather than
+hard-cutting; its own ablation (low-frequency-only scaling fails)
+indirectly supports our finding that high-frequency suppression is the
+operative mechanism. ReRoPE \citep{li2026rerope} nulls a frequency band on
+a video DiT's temporal axis for a diagnostic ablation, not reference
+conditioning -- a different setting.
+
+\paragraph{Small-LoRA in-context conditioning.} ICEdit's diptych LoRA
+($\sim$1\% of parameters, fill-pretrained base) and UNO/OminiControl show
+a small LoRA can teach in-context conditioning to a DiT already
+pretrained for image-to-image tasks. Our training-light mechanism asks
+whether the same recipe transfers to a backbone with \emph{no} such
+pretraining, at 0.06\% of parameters, and reports a pre-registered
+ablation whose primary hypothesis fails rather than only the
+configuration that worked.
+
+\paragraph{Anime identity metrics.} CCIP (\texttt{imgutils}) is used
+throughout prior anime-generation tooling but, per our search, never
+cited or benchmarked in a paper; the ArcFace/FaceNet-style recognizers
+IP-Adapter's and InstantID's own evaluations use do not detect faces on
+anime images at all. We treat CCIP as a pre-filter only and report VLM
+(Gemini 3.1 Pro) chain-of-thought judgments -- identity match
+\emph{and} visible defects jointly -- as the final signal.

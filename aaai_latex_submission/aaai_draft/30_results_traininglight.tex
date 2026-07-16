@@ -1,0 +1,54 @@
+\section{Experiments: Training-Light Mechanism}\label{sec:results-tl}
+
+\subsection{Layer-position ablation}\label{sec:bandablation}
+
+Four band-LoRA arms, matched trainable-parameter budget (early 0--15
+$r{=}8$; mid 10--25 $r{=}8$, the pre-existing production recipe; late
+14--29 $r{=}8$; full-depth 0--29 $r{=}4$, rank lowered to stay near the
+16-layer arms' 3.93M-parameter budget), 4000 steps, held-out 30-subject
+dev set $\times$ 2 seeds ($n{=}60$/arm), same defect-aware judge protocol
+as the training-free experiments above. \textbf{Pre-registered decision rule,
+locked before the three missing arms were run}: a band counts as
+specially favored on identity-match only if its clean-yes point estimate
+is highest \emph{and} its 95\% CI does not overlap the worst arm's.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Arm & clean-yes & defect & clean-usable \\
+\midrule
+early 0--15 ($r{=}8$) & 15.0\% [8,26] & 8.3\% [4,18] & 45.0\% [33,58] \\
+mid 10--25 ($r{=}8$) & 21.7\% [13,34] & \textbf{3.3\% [1,11]} & 55.0\% [42,67] \\
+late 14--29 ($r{=}8$) & 21.7\% [13,34] & 18.3\% [11,30] & 46.7\% [35,59] \\
+full-depth ($r{=}4$) & 23.3\% [14,35] & \textbf{28.3\% [19,41]} & 43.3\% [32,56] \\
+\bottomrule
+\end{tabular}
+\caption{Band-position ablation, $n{=}60$/arm, Wilson 95\% CI.}
+\label{tab:bandablation}
+\end{table}
+
+\textbf{Primary metric result: null.} All four clean-yes CIs overlap
+(highest, full-depth, 23.3\% [14,35]; lowest, early, 15.0\% [8,26]) --
+under the pre-registered rule, band position is \emph{not} specially
+favored for identity-match. The a priori hypothesis (``10--25 is the
+identity band'') fails on its own designed test; we report this rather
+than reframe around a friendlier metric.
+
+\textbf{Secondary finding: a real, CI-decisive defect gradient.} Defect
+rate is not flat: 3.3\%$\to$8.3\%$\to$18.3\%$\to$28.3\%, and mid's CI
+does not overlap full-depth's (8.6$\times$ point-estimate gap). Because
+$n{=}60$ is really 30 subjects $\times$ 2 seeds, we recomputed with a
+subject-clustered bootstrap (collapse each subject's 2 seeds to one
+any-defect indicator, resample at $n{=}30$): mid 6.7\% [0,17] vs.\
+full-depth 43.3\% [27,60] -- still non-overlapping, if anything more
+decisive. Three full-depth defect-flagged samples were checked against
+the matched mid-band generation of the \emph{same} subject/seed
+(Fig.~\ref{fig:bandablation}); all three are genuine anatomical/geometric
+breaks (garbled hand/strap routing, broken arm/jacket geometry), not
+judge noise. \textbf{Layer position governs how much collateral
+rendering damage LoRA training does, not how much identity-conditioning
+capacity it learns} -- a more specific claim than the ablation was
+designed to test, and the likely real reason the informally-tuned
+production band (10--25) happened to work well: not because it is where
+identity lives, but because it is where training does the least damage.

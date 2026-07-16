@@ -1,0 +1,66 @@
+\section{Introduction}\label{sec:intro}
+
+Reference-conditioned identity preservation -- feed a reference portrait,
+get the same character in a new scene -- is normally bought one of two
+ways: train a dedicated adapter on a large paired dataset
+\citep{ye2023ipadapter,li2023photomaker,wang2024instantid}, or switch to
+an instruction-following edit model whose base was already pretrained
+for image-to-image tasks \citep{blackforest2025fluxkontext}. Neither
+route is available when the base model must remain a frozen, pure
+text-to-image (T2I) diffusion transformer: no per-subject or general
+fine-tuning, no departure from T2I semantics into edit-model territory,
+no library modification. We show such a model -- a frozen anime T2I DiT,
+Z-Image \citep{zimage2025} -- can be activated as a reference-conditioned
+identity generator by two cheap, mechanistically independent
+interventions: concatenating the reference image's attention key/value
+tensors into a restricted band of self-attention layers at inference
+time (zero training), and a rank-8 LoRA on 0.06\% of backbone parameters
+within the same layer band (minutes of training, not per-subject).
+
+Getting either mechanism to actually work exposes the same blind spot
+twice. Both mechanisms have a natural, cheap-to-measure headline metric
+-- does the generated character look like the reference? -- and both
+times, optimizing or ablating against that metric alone would have led
+to the wrong conclusion. The training-free mechanism's naive
+position-preserving key injection causes literal copy-paste ``ghosting''
+because the reference and target token grids share the same RoPE
+coordinate origin; a frequency-gated fix removes the ghosting and *does*
+raise raw identity-match rate on a small development set (23\%$\to$40\%)
+-- but held-out validation with a defect-aware judge shows the same
+recipe also raises a severe composition-collapse defect rate from 20\%
+to 82\%, so the rate of an actually usable image collapses from 53\% to
+15\%. The training-light mechanism's layer-position ablation was
+pre-registered to test whether a specific 16-layer band is uniquely
+responsible for identity-conditioning capacity; identity-match turns out
+to be statistically flat across every tested band (95\% CI overlapping,
+confirmed under subject-level clustering) -- the hypothesis fails -- but
+the same bands differ 8.6$\times$ on training-induced rendering-defect
+rate, a large, CI-decisive effect entirely invisible to the metric the
+ablation was designed around.
+
+\paragraph{Contributions.}
+\textbf{(1) A mechanistic fix and its honest limit.} A mechanistic
+explanation, from the transformer's own RoPE coordinate construction, of
+why naive position-preserving key/value injection produces copy-paste
+ghosting, and a frequency-gated re-application of RoPE that removes it --
+together with held-out evidence that the fix,
+as currently tuned, trades ghosting for a worse composition-collapse
+failure mode, so we recommend the simpler position-free baseline for
+deployment rather than the mechanism this project set out to promote.
+\textbf{(2) A training-light alternative, characterized by a
+pre-registered null result.} A 0.06\%-parameter band-LoRA competitive
+with a purpose-trained 12.9B adapter baseline on identity-match and
+usable-output rate, whose designed keystone ablation (does layer
+position determine identity capacity?) returns null -- and whose
+unplanned finding (layer position determines defect rate instead) we
+report as the more specific, more useful result.
+\textbf{(3) A cross-mechanism evaluation finding.} Two independent
+mechanisms, two independent evaluation protocols, the same blind spot:
+a design choice's practical consequence can live almost entirely on a
+composition-defect axis that identity-match-only scoring never touches.
+We argue this is not a one-off artifact of either method and that
+future reference-conditioning work in this space should report a joint
+identity-and-defect metric from the start.
+\textbf{(4) A held-out validation protocol} that catches exactly the
+failure it was built to catch, on a probe set disjoint from every
+development set used to tune either mechanism.

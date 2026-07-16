@@ -1,0 +1,125 @@
+\section{Experiments: Training-Free Mechanism}\label{sec:results-tf}
+
+\subsection{Evaluation protocol}\label{sec:protocol}
+
+CCIP (anime-domain character similarity, SAME threshold 0.178) is a fast
+pre-filter only; it is confirmed insensitive to several failure modes
+(hair-color changes, gender/hairstyle flips) a downstream VLM judge
+catches. We report Gemini 3.1 Pro's \texttt{same\_character: yes/no/partial}
+judgment (ref vs.\ generated, ignoring pose/outfit/background) as the
+primary identity metric. Held-out and baseline judgments add a second,
+independent \texttt{visible\_defect: yes/no} field to the same judge call
+(rendering artifacts only -- tiling, duplication, broken anatomy;
+explicitly not art-style or pose) and report the \emph{joint} metric,
+using an explicit chain-of-thought prompt (the model reasons through each
+identity axis and the composition check in prose before emitting JSON).
+
+\subsection{Dev-set ablation (band width $\times$ position gating)}\label{sec:devablation}
+
+10 subjects, 2--4 seeds, random sample, $n{=}20$--$40$, Wilson 95\% CI.
+Every row is measured on the same 10 subjects band width and
+\texttt{lowfreq\_k} were tuned against -- reported to document the tuning
+process; the held-out validation below is the number that matters for
+any external claim.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Recipe & $n$ & yes & no (95\% CI) \\
+\midrule
+\texttt{strip}, band 21--25 (prior default) & 40 & 18\% & 25\% [14,40] \\
+\texttt{center}, band 21--25 & 20 & 10\% & 55\% [34,74] \\
+\texttt{lowfreq} $k{=}8$, band 21--25 & 20 & 0\% & 30\% [14,52] \\
+\texttt{lowfreq} $k{=}8$, band 10--25 & 40 & 58\% & \textbf{0\% [0,9]} \\
+\bottomrule
+\end{tabular}
+\caption{Dev-set band/position ablation (identity-only metric).}
+\label{tab:devablation}
+\end{table}
+
+\subsection{Held-out validation: the recipe reverses}\label{sec:heldout}
+
+Recipe frozen at \texttt{band=10-25, refpos=lowfreq, lowfreq\_k=8,
+sched=taper, w=4.0} \emph{before} running this section. 30 subjects
+disjoint from the dev set, 2 seeds, paired against the old default on the
+same subjects/seeds, single blind judgment pass.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Recipe & $n$ & defect & clean-yes & clean-usable \\
+\midrule
+old (\texttt{strip}) & 60 & 20\% [12,32] & 13\% [7,24] & \textbf{53\% [41,65]} \\
+new (\texttt{lowfreq}) & 60 & \textbf{82\% [70,89]} & 8\% [4,18] & 15\% [8,26] \\
+\bottomrule
+\end{tabular}
+\caption{Held-out defect and joint (usable-output) metric. clean-yes = identity=yes \& no defect; clean-usable = identity$\in\{$yes,partial$\}$ \& no defect.}
+\label{tab:heldout}
+\end{table}
+
+Read in isolation, the marginal identity metric looks like a modest win
+for the new recipe (yes: 23\%$\to$40\%) -- exactly the framing the
+defect field above was designed to guard against. 79\% of the new
+recipe's ``yes'' verdicts also carry a defect flag
+(19/24). On usable-output rate the 95\% CIs do not overlap: the
+position-free baseline is usable 53\% of the time; the frequency-gated
+recipe, 15\%. The defect is a composition failure -- collaged/tiled
+sub-images, picture-in-picture insets, duplicated fragments
+(Fig.~\ref{fig:holdout}) -- far more frequent than a minor artifact. Both
+arms share the same subjects, reference images, and seeds; only the
+injection recipe differs, ruling out a data-source confound. The
+reversal is CI-decisive on defect rate and clean-usable rate; on strict
+identity match alone the CIs overlap (directional, not decisive, at
+$n{=}60$/arm). \textbf{Conclusion: \texttt{strip}/band 21--25 is the
+recipe this work recommends for deployment}; \texttt{lowfreq}/band
+10--25 remains a research direction with a real, unresolved defect mode.
+
+\subsection{Baseline comparison}\label{sec:baseline}
+
+IP-Adapter-SDXL (\texttt{ip-adapter-plus-face\_sdxl\_vit-h}, no per-subject
+training, same 30 held-out subjects) is the same-class trained-adapter
+baseline. \texttt{krea2-identity-edit} (community LoRA on the 12.9B
+general-domain Krea-2-Turbo, zero retraining by us) is a purpose-trained,
+architecturally distinct in-context adapter -- not an architecture-matched
+comparison, but the strongest publicly available bar we could run at zero
+additional training cost.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Recipe & defect & clean-yes & clean-usable \\
+\midrule
+IP-Adapter-SDXL & 33\% & 18\% [11,30] & 58\% [46,70] \\
+krea2-identity-edit & \textbf{2\% [0,9]} & \textbf{33\% [23,46]} & 58\% [46,70] \\
+this work, \texttt{strip} & 20\% [12,32] & 13\% [7,24] & 53\% [41,65] \\
+this work, \texttt{lowfreq} & \textbf{82\% [70,89]} & 8\% [4,18] & 15\% [8,26] \\
+\bottomrule
+\end{tabular}
+\caption{Four-arm held-out comparison, $n{=}60$ each.}
+\label{tab:baseline}
+\end{table}
+
+Restricting to the two general-adapter-class arms (\texttt{strip},
+IP-Adapter): both metrics nominally favor IP-Adapter, but every CI
+overlaps heavily -- neither ranking is decisive at this sample size. The
+defensible claim is \textbf{training-free \texttt{strip} is statistically
+indistinguishable from a same-class trained adapter's strict-identity
+rate, at zero training cost} -- not that it beats one. That does not
+extend to krea2: against \texttt{strip}, krea2 is CI-decisive on defect
+rate and clean-yes, but only directional on clean-usable. krea2's
+near-elimination of the collage defect fits its mechanism -- a source
+latent trained end-to-end as a structured in-context token, unlike raw
+K/V concatenated post-hoc into attention pools the frozen model never
+expected -- but krea2 also has the \emph{highest} outright-miss rate of
+all four arms (40\% vs.\ IP-Adapter's 15\%): most reliable when it
+works, most likely to miss outright when it does not. Manual inspection
+(Fig.~\ref{fig:baseline}) shows three qualitatively distinct failure
+signatures -- \texttt{lowfreq} collages, IP-Adapter garbles hands, krea2
+normalizes/drops accessories toward a generic prior rather than
+mis-rendering them -- not one mode at three severities. \texttt{lowfreq}
+remains decisively worst on both strict metrics despite the highest raw
+identity-match rate, reinforcing that
+identity-match alone does not reliably rank these methods.

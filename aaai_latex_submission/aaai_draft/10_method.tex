@@ -1,0 +1,58 @@
+\section{Method}\label{sec:method}
+
+\subsection{Training-free: ref-KV injection}\label{sec:method-tf}
+
+At each denoising step we run one additional forward pass of the
+reference image through a subset (``band'') of the transformer's layers
+in \emph{capture} mode: at each active layer, take the post-QK-RMSNorm
+key and the value for reference tokens and store them. In the real
+generation's forward pass (\emph{inject} mode), the stored reference
+key/value is concatenated onto the target sequence's key/value at the
+same layers, before scaled-dot-product attention (Fig.~\ref{fig:mechanism}a).
+Injection strength is a per-step taper schedule on the injected
+\emph{value} only, not the key -- QK-RMSNorm makes any key scalar
+multiple a no-op, so only value-scaling has an effect.
+
+\paragraph{The position problem.} Reading the transformer's coordinate
+construction directly shows every image slot's spatial axes are indexed
+from the same origin; a reference token grid and a target token grid
+therefore share a coordinate origin. Injecting the reference's own
+post-RoPE key (\texttt{refpos=keep}) causes it to attend as if physically
+located in the target's top-left sub-block, producing literal
+copy-paste ghosting (Fig.~\ref{fig:mechanism}b). Re-centering the
+reference's RoPE coordinates to the middle of the target grid removes
+the ghosting but introduces a different failure: full-precision
+repositioned content collides with the model's own freedom to choose a
+new pose, producing anatomical distortion in roughly a third of samples.
+
+\paragraph{Frequency-gated fix.} We re-apply RoPE to the reference key at
+the target-centered coordinate, but null all but the lowest-$k$
+frequency-pair channels on the spatial axes to the identity rotation
+($k{=}8$, found by a small sweep). This conveys coarse spatial layout
+(``this content sits left-of-center, upper-half'') without exact
+pixel-position binding, avoiding the composition-collision failure of
+full re-centering while retaining more geometric information than fully
+position-free injection. Neither widening the injection band alone nor
+applying frequency-gating alone at the original band improves over the
+position-free baseline; only widening the band \emph{and} switching the
+newly-added layers to frequency-gated injection wins on the development
+set below -- we interpret early/middle layers as
+more likely to encode coarse global structure, so feeding them
+content-plus-coarse-position is a qualitatively different signal than
+feeding late layers full content. A WD14 tagger extracts structural
+attributes (hair/eye color, gender, accessories) into a generic,
+non-instructional T2I caption, addressing attributes that are freely
+``what'' rather than ``where'' -- orthogonal to the KV channel, which
+cannot reliably address these regardless of position-gating.
+
+\subsection{Training-light: band-LoRA}\label{sec:method-tl}
+
+The training-free mechanism's structural failure mode -- degenerating
+into copying reference pixels wholesale -- motivates a second,
+independent mechanism: a standard LoRA (rank $r$, $\alpha{=}r$) on
+\texttt{to\_q/to\_k/to\_v/to\_out.0} within a contiguous band of layers,
+trained end-to-end to \emph{route} to the right identity information
+rather than being handed it directly. A production recipe (band 10--25,
+$r{=}8$, 3.9M / 0.06\% of backbone parameters) was tuned informally
+before this work tested whether that specific depth range is actually
+special, or just the first configuration that worked.

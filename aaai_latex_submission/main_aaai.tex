@@ -1,0 +1,131 @@
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai2027}  % DO NOT CHANGE THIS
+% The serif, sans-serif, and monospaced fonts are loaded automatically by
+% aaai2027.sty (newtxtext, helvet, courier). DO NOT add \usepackage{times},
+% \usepackage{helvet}, \usepackage{courier}, or any other font package.
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\newcommand{\model}{Z-Image}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\ie}{\emph{i.e.}}
+
+% Keep the \pdfinfo as shown here. There's no need
+% for you to add the /Title and /Author tags.
+\pdfinfo{
+/TemplateVersion (2027.1)
+}
+
+\setcounter{secnumdepth}{0} % AAAI: unnumbered sections by default
+
+\title{Identity-Match Is Not Enough: Composition-Collapse Blind Spots in Two Cheap Reference-Conditioning Mechanisms for a Frozen Anime Diffusion Transformer}
+\author{
+    Anonymous Submission
+}
+\affiliations{
+    %
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Reference-conditioned identity preservation is normally bought with a
+purpose-trained adapter on real-face data or a base model already
+pretrained for editing; neither transfers to a frozen, pure
+text-to-image (T2I) anime diffusion transformer that must remain
+unmodified. We activate such a model with two cheap, independent
+mechanisms -- training-free attention key/value injection from a
+reference image, and a 0.06\%-parameter band-LoRA -- and show both are
+competitive with a same-class trained adapter at a fraction of the cost.
+The paper's central finding is methodological: identity-match rate, the
+field's standard headline metric, is not merely incomplete but actively
+misleading, in two mechanistically unrelated settings. First, a
+training-free recipe tuned on a small development set raises raw
+identity-match rate (23\%$\to$40\%) but also raises a severe
+composition-collapse (collage/tiling) defect rate from 20\% to 82\%,
+collapsing usable-output rate from 53\% to 15\% -- identity-match alone
+would have recommended the worse recipe. Second, a pre-registered
+ablation on the unrelated training-light mechanism, testing whether a
+specific transformer-layer band is responsible for identity capacity,
+finds identity-match statistically flat across all four tested layer
+bands (95\% CI overlapping, confirmed under subject-level clustering) --
+the a priori hypothesis fails -- while the same layer bands differ
+8.6$\times$ on training-induced rendering-defect rate (CI-decisive):
+layer position governs how much collateral damage LoRA training does to
+composition, not how much identity-conditioning capacity it learns. We
+report both findings, including the failed hypothesis, as evidence that
+identity-match-only evaluation is a systematically optimistic proxy for
+reference-conditioning quality that future work in this space should not
+rely on alone.
+\end{abstract}
+
+\input{aaai_draft/00_intro}
+
+\input{aaai_draft/05_related}
+
+\input{aaai_draft/10_method}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figs/mechanism_diagram_kv_injection.png}
+  \caption{The ref-KV injection mechanism (Method). (a)
+  Capture pass: reference K/V stored from a layer band. (b) Naive
+  same-origin injection ghosts; the fix re-centers RoPE and keeps only
+  low-frequency channels. (c) Generation pass: captured K/V concatenated
+  in, scaled by a taper $w(t)$. Conceptual illustration, no quantitative
+  data encoded.}
+  \label{fig:mechanism}
+\end{figure*}
+
+\input{aaai_draft/20_results_trainingfree}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figs/holdout_reversal_defect_qualcheck.png}
+  \caption{Held-out reversal: three subjects,
+  \texttt{strip} (old) vs.\ \texttt{lowfreq} (new), same subject/seed. All
+  three show \texttt{same\_character=yes} for the new recipe, but a
+  collaged/tiled sub-image corrupts the composition -- the failure mode
+  behind the 82\% held-out defect rate.}
+  \label{fig:holdout}
+\end{figure*}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figs/baseline_comparison_qualcheck.png}
+  \caption{Baseline comparison: top (u7122),
+  identity matches in all four arms but only \texttt{strip}/krea2 are
+  defect-free -- \texttt{lowfreq} collages, IP-Adapter garbles the hand.
+  Bottom (u5648), a hard subject every arm misses, but
+  differently: \texttt{strip}/IP-Adapter/krea2 normalize the dropped
+  accessory, \texttt{lowfreq} also collages -- three distinct failure
+  signatures, not one.}
+  \label{fig:baseline}
+\end{figure*}
+
+\input{aaai_draft/30_results_traininglight}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.56\textwidth]{figs/band_ablation_defect_qualcheck.png}
+  \caption{Band-position qualitative check: mid 10--25 vs.\ full-depth
+  0--29, same subject/seed. All three
+  full-depth cells are judge-flagged defective; inspection confirms
+  genuine anatomical breaks absent in the matched mid-band generation.}
+  \label{fig:bandablation}
+\end{figure*}
+
+\input{aaai_draft/40_limits_conclusion}
+
+\bibliography{references}
+
+\end{document}
