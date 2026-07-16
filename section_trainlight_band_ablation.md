@@ -137,6 +137,28 @@ for anyone building similarly small identity-routing adapters on frozen DiTs.
   The contribution here is the mechanism finding (position-dependent damage,
   not position-dependent identity capacity) and the honest ablation
   methodology, not state-of-the-art accuracy.
+- **Cross-judge check (2026-07-16, `probe/60_crossjudge_gpt55.py`), added
+  after a re-review flagged that both this finding and the training-free
+  reversal were validated by the same judge (Gemini 3.1 Pro) and the same
+  project — a fair "how independent is this really" objection.** Re-judged
+  the mid-vs-full-depth pairs (n=30/arm, s0 only) with GPT-5.5 (Kaon
+  router, a different model family from Gemini), identical
+  `HOLDOUT_PROMPT`. Result is a **real but weak** replication, reported
+  honestly rather than rounded up: **direction replicates** (full-depth
+  defect 6.7% [2,21] vs mid 0.0% [0,11], both defect-flagged cases are in
+  the full-depth arm, zero in mid) but **magnitude is much smaller and the
+  CIs overlap** — GPT-5.5 flagged only 2/60 images as defective total,
+  vs. Gemini's much higher flag rate on the identical images (Gemini
+  s0-only subset on the same 30 subjects: mid 6.7% [2,21], full-depth
+  26.7% [14,44]). GPT-5.5 is evidently a much less sensitive judge for
+  this specific defect category (composition collage/anatomical
+  garbling) at this prompt/temperature — a judge-calibration difference
+  worth noting as its own small finding, not just noise. **Honest
+  reading**: this is weak-to-moderate independent support for the
+  *direction* of the mid-vs-full-depth defect claim, not a strong
+  confirmation of the *magnitude* — do not claim more than that in the
+  write-up. Full defect-flagged notes and raw judge output:
+  `data/crossjudge_gpt55_band_mid_vs_fulldepth.json`.
 - **Open scope question**: this section currently lives outside
   `draft_v0.md` because that draft is titled and scoped as the training-free
   KV-injection mechanism specifically. Decide before the abstract-registration

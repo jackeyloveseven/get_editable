@@ -27,6 +27,7 @@ re-copy here afterward if the numbers changed.
 | `repprobe30_tags.json` | the 30-subject held-out dev set (rep30) subject tags/prompts used for all training-light arm generations | referenced by `probe/46_devprobe.py`, `probe/58_band_ablation_run.sh` |
 | `holdout30_tags.json` | the 30-subject held-out set subject tags/prompts used for §4.3/§4.4 (training-free line + baselines) | referenced by `probe/41_holdout_eval.py`, `probe/42_baseline_ipadapter.py`, `probe/43_baseline_krea2.py` |
 | `train_manifest_mix3.jsonl` | the 5,936-row / 3,339-subject training manifest used for all four band-ablation LoRA training runs | referenced by `probe/45_train_lora.py --manifest`, `probe/58_band_ablation_run.sh` |
+| `crossjudge_gpt55_band_mid_vs_fulldepth.json` | independent cross-judge check (GPT-5.5 via Kaon router, disjoint from Gemini 3.1 Pro) on the mid-vs-full-depth defect-rate pairs, n=30/arm single-seed, 60 calls total; produced by `scripts/60_crossjudge_gpt55.py` | `section_trainlight_band_ablation.md` caveats, `idea_thesis.md` Motivation/Method, `aaai_latex_submission/aaai_draft/40_limits_conclusion.tex` Limitations |
 
 ## Subject-clustered CI recompute (not a stored file — reproducible one-liner)
 

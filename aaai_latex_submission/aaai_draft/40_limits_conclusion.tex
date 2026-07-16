@@ -17,7 +17,11 @@ seeds, not 60 independent draws; we report subject-clustered CIs where
 this matters most above but a full re-audit is future work. The
 defect-gradient spot-check was 3 of 17 flagged cases,
 selected for clarity of the judge's note, not randomly -- it rules out
-``pure judge noise'' but not ``100\% of flags are real.'' Absolute
+``pure judge noise'' but not ``100\% of flags are real.'' A second,
+different-family judge (GPT-5.5, $n{=}30$/arm, single seed) replicates
+the gradient's \emph{direction} but not its magnitude, with CIs
+overlapping under this less-sensitive judge -- direction is
+judge-corroborated, magnitude is not. Absolute
 numbers are modest regardless of arm: 55\% clean-usable / 21.7\%
 clean-yes is not state-of-the-art accuracy in either line of this work;
 the contribution is the evaluation-methodology finding and the honest

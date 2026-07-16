@@ -40,6 +40,19 @@ anime," but "identity-match-only evaluation is a systematically
 optimistic proxy for reference-conditioning quality, and this isn't a
 one-off artifact of a single method."
 
+A fair objection: both replications above ran under the same judge
+(Gemini 3.1 Pro) and the same project, so "independent" is doing less
+work than it sounds like. A third check (GPT-5.5, a different model
+family, same prompt, n=30/arm on the training-light mid-vs-full-depth
+pairs) gives a real but modest answer, reported honestly rather than
+rounded up: the *direction* replicates (full-depth's defect rate is
+higher than mid's, and every defect flag under this judge falls in the
+full-depth arm, none in mid) but the *magnitude* shrinks sharply and the
+CIs overlap — GPT-5.5 flags this defect category far less readily than
+Gemini does on the identical images. This is weak-to-moderate
+independent support for the direction of the claim, not a strong
+replication of its size, and we say so rather than claim more.
+
 ## Method
 1. **Training-free path.** During a "capture" forward pass, run the
    reference image through the frozen DiT restricted to a contiguous band
@@ -84,3 +97,9 @@ one-off artifact of a single method."
    does, not how much identity-conditioning capacity it learns — a
    different and more specific claim than the one the ablation was
    designed to test.
+6. **Cross-judge check.** Re-judge the mid-vs-full-depth pairs with a
+   second model family (GPT-5.5, not Gemini), same prompt, disjoint from
+   the judge used to produce every other number in this work. Report the
+   result as-is: direction replicates, magnitude and CI width do not —
+   a real independence check, not a rhetorical one, and its limits are
+   part of the reported result rather than omitted.
