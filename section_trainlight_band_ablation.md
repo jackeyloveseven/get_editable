@@ -1,11 +1,20 @@
 # Training-light band-LoRA: a layer-position ablation
 
-*Status: keystone result for the Wave-3 (training-light) line, completed
-2026-07-15. Written as a standalone, paper-ready section — not yet merged into
-`draft_v0.md`, since that draft's title and scope are specifically the
-training-free KV-injection mechanism. Whether this becomes a new section of
-the same paper or a separate submission is an open scope question (see note
-at the end).*
+> **⚠️ SUPERSEDED IN PART (2026-07-16).** The defect-gradient claim this
+> section presents as its keystone ("mid 6.7% vs full-depth 43.3%
+> clustered, CI-decisive") was **refuted by the project's own audit** the
+> day after it was written — see the *Replication and confound audit*
+> addendum at the end of this file. The clean-yes null (identity is
+> depth-uniform) **survives and is now cross-set replicated**. The body
+> below is preserved as the honest historical record; do not quote its
+> defect-gradient numbers without the addendum's context. The AAAI
+> submission text (`aaai_draft/30_results_traininglight.tex`,
+> `40_limits_conclusion.tex`, abstract, intro) was rewritten 2026-07-16 to
+> the audited state.
+
+*Status: originally the keystone result for the Wave-3 (training-light)
+line, completed 2026-07-15; merged into the two-mechanism AAAI-27
+submission. Scope note at the end predates that merge decision.*
 
 ## Setup
 
@@ -167,3 +176,54 @@ for anyone building similarly small identity-routing adapters on frozen DiTs.
   frozen anime DiT: training-free and training-light"), or (b) a separate,
   shorter submission. This is a real content decision, not just a formatting
   one — it changes the abstract, the title, and the related-work framing.
+  *(Resolved 2026-07-15: option (a), merged into the AAAI-27 two-mechanism
+  submission.)*
+
+## Replication and confound audit (2026-07-16) — the gradient does not survive
+
+Run the day after the section above was written, before abstract
+registration. Full data: `data/gemini_judge_ho30_band_*.json`,
+`data/gemini_judge_cleanmid_*.json`, `data/ho30_band_replication_summary.json`,
+`data/cleanmid_summary.json`, `data/random_defect_audit_band_ablation.json`;
+analysis scripts `probe/64` (selftest reproduces every published clustered
+number before touching fresh data) and `probe/65`.
+
+1. **Cross-set replication fails.** All four checkpoints, zero retraining,
+   re-run on holdout30 (disjoint 30 subjects, same judge): interior
+   ranking inverts (late best 8.3%, mid second-worst 20.0%);
+   mid-vs-full-depth clustered CIs overlap (36.7% [20,53] vs 46.7%
+   [30,63]). The rep30 separation does not generalize.
+2. **The mid arm was double-confounded.** It reused a pre-existing
+   checkpoint (`run_mix1`) trained on the mix2 manifest (no `ref_caption`
+   field → generic ref-slot caption; the other three arms trained on mix3
+   with per-subject captions), and its published generations carried the
+   `"In an anime_2d style, "` prefix that no other arm used. Same-pixel
+   re-judging quantifies the prefix at ~10pp defect suppression; the
+   manifest/checkpoint effect is statistically inseparable from
+   run-to-run training variance (same-protocol checkpoint comparison CIs
+   overlap); a residual remains that two unrun 2×2 protocol cells would
+   be needed to settle.
+3. **A confound-free mid erases the gradient on its home set.**
+   `run_mix2/step_4000` (same recipe, mix3 manifest, verified twin — only
+   `save_every` differs) generated prefix-free on rep30: defect 30.0%
+   [20,43] per-image, 53.3% [37,70] clustered — **disjoint from the
+   published 6.7% [0,17] on the same 30 subjects**, and cross-set stable
+   (26.7% on holdout30). Every prefix-free mid measurement clusters in
+   the 20–30% band; the published 3.3% is the lone outlier and the lone
+   measurement with the unique protocol.
+4. **Seeded random flag audit** (replacing the cherry-picked 3/17
+   spot-check): full-depth 3 CONFIRMED / 4 BORDERLINE / 3 FALSE-POSITIVE
+   of 10 sampled; late 1/1/3 of 5; mid 0/2/0 of 2; negative controls 0/4
+   missed. Raw judge flag rates overstate severe-defect rates by
+   ~1/3–2/3 per arm; judge failure modes documented (identity complaints
+   absorbed into `visible_defect`, one outright hallucination).
+
+**Net result.** Under a uniform protocol every arm sits in an 8–30%
+defect band with no stable position ordering; full-depth is numerically
+worst on both sets but never CI-separated from mid. The claims that
+survive: (a) clean-yes identity is depth-uniform — replicated across two
+held-out sets, two protocols, and all five arm-measurements; (b) the
+band-LoRA remains statistically tied with krea2 on usable-output under a
+protocol-matched re-run (51.7–53.3% vs 58%). The defect gradient, and the
+"band 10-25 minimizes collateral damage" interpretation built on it, are
+withdrawn.

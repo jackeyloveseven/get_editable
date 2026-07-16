@@ -11,12 +11,18 @@ against `data/gemini_judge_*.json` first — see
 `docs/design/2026-07-02_wave1_exec_design.md` for full experimental history
 and negative results this draft compresses away.
 
-> **平行工作线（2026-07-13，暂停）**：本 draft 是 **training-free KV 注入**（strip/
-> lowfreq）这条线的论文。此后开了一条**训练轻量 band-LoRA**（band 10-25 r8 = 3.9M/0.06%，
-> 3b in-context 条件化）的独立方法线，机制不同、不并入本 draft。其诚实最终结果见
-> `docs/design/2026-07-11_traininglight_design.md` §11：参考条件化前提决定性验证通过、
-> holdout30 与 krea2 身份持平/可用度略前/唯一差 defect（13% vs 2%）、ITS 与 UnoPE 均无效、
-> **决定顶会的 band 定位消融被用户叫停未跑完**。两条线共用 krea2/IP-Adapter 基线判定 JSON。
+> **两条方法线并投同一份 AAAI-27 稿（此状态栏更新于 07-16 晚）**：本 draft 是
+> **training-free KV 注入**（strip/lowfreq）线的详细版本；**训练轻量 band-LoRA** 线写在
+> `section_trainlight_band_ablation.md`，两线已合并进 `aaai_latex_submission/main_aaai.tex`。
+> **重大更新（2026-07-16）**：band 消融的 defect 梯度（mid 6.7% vs full-depth 43.3%
+> clustered，昨日的 keystone）**已被本项目自己的审计否决**——跨集复现失败（holdout30 上
+> 排序倒转、CI 重叠）+ mid 臂双重混淆确认（mix2 manifest + anime_2d 生成前缀，前缀经同
+> 像素重判定量 ~10pp）+ 去混淆重跑在原集上 defect 30.0%（聚类 CI 与混淆值不相交）。
+> **幸存且跨集复现的结论**：clean-yes 身份深度均匀 null；band-LoRA 与 krea2 的
+> usable-output 协议对齐后仍统计打平（51.7-53.3% vs 58%）。投稿全部表面（摘要/引言/
+> 结果/局限/结论）已按审计后状态重写，梯度以"被完整审计否决的伪影"如实呈现。证据链见
+> `section_trainlight_band_ablation.md` 末尾 2026-07-16 addendum。两条线共用
+> krea2/IP-Adapter 基线判定 JSON。
 
 ## Abstract
 

@@ -2,8 +2,12 @@
 
 \texttt{lowfreq} (band 10--25) is \textbf{not production-ready}: 82\%
 held-out defect rate collapses usable-output to 15\% despite a higher
-raw identity-match rate; \emph{why} widening the band and
-frequency-gating together destabilize composition is unexplained.
+raw identity-match rate. \emph{Why} is partially decomposed: a
+position-information-free variant at the same widened band is
+statistically as defective (75\% vs.\ 71\% on a dev probe), ruling out
+position-encoding precision as the driver -- injecting reference
+content into layers 10--20 at all is what destabilizes; no cheap fix
+emerged.
 Geometric attributes (face/eye shape) remain a residual failure for the
 recommended (\texttt{strip}) recipe even where composition is clean
 (45\% partial rate). The frequency-gating sweet spot ($k{=}8$) and band
@@ -13,19 +17,23 @@ work, as are AnimeAdapter and FreeGraftor/UNO baselines (no public
 weights / gated dependency).
 
 For the training-light mechanism, $n{=}60$ is 30 subjects $\times$ 2
-seeds, not 60 independent draws; we report subject-clustered CIs where
-this matters most above but a full re-audit is future work. The
-defect-gradient spot-check was 3 of 17 flagged cases,
-selected for clarity of the judge's note, not randomly -- it rules out
-``pure judge noise'' but not ``100\% of flags are real.'' A second,
-different-family judge (GPT-5.5, $n{=}30$/arm, single seed) replicates
-the gradient's \emph{direction} but not its magnitude, with CIs
-overlapping under this less-sensitive judge -- direction is
-judge-corroborated, magnitude is not. Absolute
-numbers are modest regardless of arm: 55\% clean-usable / 21.7\%
-clean-yes is not state-of-the-art accuracy in either line of this work;
-the contribution is the evaluation-methodology finding and the honest
-ablation record.
+seeds, not 60 independent draws; headline comparisons therefore carry
+subject-clustered CIs alongside per-image ones. The defect-gradient
+audit chain (different-family cross-judge, seeded random flag audit,
+cross-set replication, confound-free re-run) is reported in the results
+section; each step independently weakened the gradient before the
+ensemble refuted it, and the first warning was visible early -- GPT-5.5
+had already failed to reproduce the gradient's magnitude. Attribution
+of the confounded mid arm's advantage is bounded, not exact: the
+generation prefix accounts for ${\sim}10$pp (same-pixel re-judge), the
+manifest/checkpoint difference is statistically inseparable from
+run-to-run training variance, and a residual remains that two unrun
+protocol cells would be needed to settle. Absolute numbers are modest
+regardless of arm: 51.7--55.0\% clean-usable / ${\sim}20$\% clean-yes
+is not state-of-the-art accuracy in either line of this work; the
+contribution is the evaluation methodology and the honest ablation
+record. All experiments ran on a single 141GB-class GPU (LoRA training
+${\sim}4$--$6.5$h per arm; generation ${\sim}35$\,min per 60 images).
 
 \section{Conclusion}\label{sec:conclusion}
 
@@ -38,20 +46,21 @@ reach for first, is not merely incomplete but actively misleading: a
 training-free recipe with a higher raw identity-match rate has a
 held-out composition-defect rate 4$\times$ higher than its predecessor,
 and a training-light ablation finds identity-match flat across every
-tested layer position while the same positions differ 8.6$\times$ on
-defect rate. Neither mechanism beats a same-class
+tested layer position -- a null that replicated across two held-out
+subject sets -- while its one apparent positive effect, an 8.6$\times$
+defect-rate gradient, was refuted by our own cross-set replication and
+confound-free re-run. Neither mechanism beats a same-class
 baseline on any metric -- \texttt{strip} is statistically tied with
 IP-Adapter on strict identity accuracy at zero training cost, and the
-band-LoRA reaches krea2-identity-edit's usable-output rate at 0.06\% of
-its parameter count and a fraction of its base-model size -- and we
+band-LoRA remains statistically tied with krea2-identity-edit's
+usable-output rate under a protocol-matched re-run (51.7--53.3\% vs.\
+58\%, overlapping CIs) at 0.06\% of its parameter count -- and we
 report both ties as ties, not wins. What remains open: the
-frequency-gated mechanism's composition-collapse mode is unexplained and
-unfixed; geometric-attribute fidelity is a residual failure even for the
-recommended recipe; and the training-light mechanism's own defect
-gradient, while CI-decisive, is characterized on a modest qualitative
-sample. We report the pre-registered null result on the ablation this
-project was originally designed around because reporting only the
-finding that survived would misrepresent what
-the evidence actually supports -- and because the null result is what
-made the more specific, more useful defect-gradient finding visible in
-the first place.
+composition-collapse mode is mechanistically narrowed
+(position-encoding precision ruled out) but unfixed;
+geometric-attribute fidelity is a residual failure even for the
+recommended recipe. We report the pre-registered null result, and the
+audit that refuted our own strongest secondary finding, because
+reporting only what survived would misrepresent what the evidence
+actually supports -- the audit trail itself is the contribution we most
+hope future reference-conditioning work reuses.

@@ -28,13 +28,17 @@ have an 82% held-out composition-defect rate (vs. 20% for the baseline) —
 identity-match alone would have recommended the worse recipe; (2) a
 pre-registered layer-position ablation on an unrelated training-light
 LoRA mechanism finds identity-match statistically flat across all tested
-positions (CI-overlapping, including under subject-clustering), while the
-*same* positions differ by 8.6x on training-induced defect rate
-(CI-decisive) — a real, large effect entirely invisible to the identity
-metric a naive ablation would have reported alone. Two independent
-mechanisms, two independent evaluation protocols, the same blind spot: a
-design choice's practical consequence can live almost entirely on a
-defect axis that identity-only scoring never touches. That is the gap
+positions (CI-overlapping, including under subject-clustering, and
+replicated on a second held-out subject set), while an apparent 8.6x
+defect-rate gradient across the same positions — CI-decisive on the
+first set — was refuted by the project's own audit (2026-07-16): it
+fails cross-set replication (interior ranking inverts), and a
+confound-free re-run of the reference arm (matched manifest, no
+generation-style prefix) erases it on the original set with clustered
+CIs disjoint from the confounded value. Two independent mechanisms, two
+different evaluation traps: a defect axis invisible to identity-only
+scoring (training-free), and a single-set/single-protocol ablation
+effect that vanished under replication discipline (training-light). That is the gap
 this work is actually positioned to close — not "nobody tried this on
 anime," but "identity-match-only evaluation is a systematically
 optimistic proxy for reference-conditioning quality, and this isn't a

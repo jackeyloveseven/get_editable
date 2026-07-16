@@ -33,10 +33,11 @@ to 82\%, so the rate of an actually usable image collapses from 53\% to
 pre-registered to test whether a specific 16-layer band is uniquely
 responsible for identity-conditioning capacity; identity-match turns out
 to be statistically flat across every tested band (95\% CI overlapping,
-confirmed under subject-level clustering) -- the hypothesis fails -- but
-the same bands differ 8.6$\times$ on training-induced rendering-defect
-rate, a large, CI-decisive effect entirely invisible to the metric the
-ablation was designed around.
+confirmed under subject-level clustering, and replicated on a second
+held-out subject set) -- the hypothesis fails. An apparent 8.6$\times$
+defect-rate gradient across the same bands then failed our own audit:
+it does not replicate cross-set, and removing a generation-protocol
+confound from its reference arm erases it on the original set.
 
 \paragraph{Contributions.}
 \textbf{(1) A mechanistic fix and its honest limit.} A mechanistic
@@ -51,16 +52,20 @@ deployment rather than the mechanism this project set out to promote.
 pre-registered null result.} A 0.06\%-parameter band-LoRA competitive
 with a purpose-trained 12.9B adapter baseline on identity-match and
 usable-output rate, whose designed keystone ablation (does layer
-position determine identity capacity?) returns null -- and whose
-unplanned finding (layer position determines defect rate instead) we
-report as the more specific, more useful result.
-\textbf{(3) A cross-mechanism evaluation finding.} Two independent
-mechanisms, two independent evaluation protocols, the same blind spot:
-a design choice's practical consequence can live almost entirely on a
-composition-defect axis that identity-match-only scoring never touches.
-We argue this is not a one-off artifact of either method and that
-future reference-conditioning work in this space should report a joint
-identity-and-defect metric from the start.
+position determine identity capacity?) returns a null that replicates
+across two held-out subject sets -- and whose one apparent positive
+side-finding we refuted ourselves, by cross-set replication and a
+confound-free re-run, and report as an audited artifact.
+\textbf{(3) A cross-mechanism evaluation finding.} Across two
+independent mechanisms, the decisive practical differences lived on
+axes standard evaluation ignores: a composition-defect axis invisible
+to identity-match scoring (training-free line), and a
+subject-set/generation-protocol sensitivity that manufactured a
+CI-decisive but spurious ablation effect (training-light line). Future
+reference-conditioning work should report a joint identity-and-defect
+metric, replicate across subject sets, and hold generation protocol
+fixed across ablation arms.
 \textbf{(4) A held-out validation protocol} that catches exactly the
-failure it was built to catch, on a probe set disjoint from every
-development set used to tune either mechanism.
+failures it was built to catch, on probe sets disjoint from every
+development set used to tune either mechanism -- including refuting
+this paper's own strongest intermediate finding.

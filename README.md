@@ -52,21 +52,28 @@ nothing here is illustrative/mock data except the AI-generated mechanism
 diagram in `figures/mechanism_diagram_kv_injection/`, which is explicitly
 marked as a conceptual draft, not a data figure.
 
-**Judge-sensitivity disclosure.** The band-ablation defect gradient's
-headline number (mid 3.3% vs full-depth 28.3%, 8.6x, CI-decisive) is
-reported throughout under the project's standard judge (Gemini 3.1 Pro).
-A same-judge/same-project independence objection was raised during
-review; the response was not to reword the objection away but to run an
-actual third-party check (`scripts/60_crossjudge_gpt55.py`, a different
-model family, GPT-5.5). The honest result: the *direction* replicates
-(full-depth still higher than mid, every defect flag under GPT-5.5 falls
-in the full-depth arm) but the *magnitude* does not (CIs overlap under
-the less-sensitive judge). This is stated consistently in
-`idea_thesis.md`, `section_trainlight_band_ablation.md`, and
-`aaai_latex_submission/aaai_draft/40_limits_conclusion.tex` — the
-headline claim in the abstract/intro/results is the primary-judge
-finding, and its judge-sensitivity is disclosed in Limitations, not
-buried or omitted.
+**Defect gradient: refuted by the project's own audit (2026-07-16).**
+The band-ablation defect gradient (mid 3.3% vs full-depth 28.3%, 8.6x,
+CI-decisive on the first dev set) was the section's keystone for one
+day. The audit chain that killed it, in order: (1) GPT-5.5 cross-judge
+(`scripts/60_crossjudge_gpt55.py`) replicated direction but not
+magnitude — the first warning; (2) a seeded random flag audit
+(`data/random_defect_audit_band_ablation.json`) found 30-70% of judge
+flags correspond to real damage depending on severity threshold;
+(3) cross-set replication (`scripts/64_ho30_band_replication_report.py`,
+zero retraining, second held-out 30-subject set) failed — interior
+ranking inverts, mid-vs-full-depth clustered CIs overlap; (4) the mid
+arm was found double-confounded (mix2-manifest checkpoint + an
+`anime_2d` generation prefix no other arm used, worth ~10pp by
+same-pixel re-judge), and a confound-free mid (`scripts/`
+`65_cleanmid_report.py`) scores 30.0% defect on the original set —
+clustered CI disjoint from the confounded 6.7%. What survives, now
+cross-set replicated: clean-yes identity is depth-uniform, and the
+band-LoRA stays statistically tied with krea2 on usable-output under a
+protocol-matched re-run. All submission surfaces (abstract, intro,
+results, limitations, conclusion) were rewritten 2026-07-16 to present
+the gradient as a refuted, fully-audited artifact — the audit trail is
+the contribution.
 
 **lowfreq's 82% defect collapse: mechanism decomposition (2026-07-16).**
 `draft_v0.md` originally called this "unexplained." A single-variable

@@ -57,15 +57,16 @@ would have recommended the worse recipe. Second, a pre-registered
 ablation on the unrelated training-light mechanism, testing whether a
 specific transformer-layer band is responsible for identity capacity,
 finds identity-match statistically flat across all four tested layer
-bands (95\% CI overlapping, confirmed under subject-level clustering) --
-the a priori hypothesis fails -- while the same layer bands differ
-8.6$\times$ on training-induced rendering-defect rate (CI-decisive):
-layer position governs how much collateral damage LoRA training does to
-composition, not how much identity-conditioning capacity it learns. We
-report both findings, including the failed hypothesis, as evidence that
-identity-match-only evaluation is a systematically optimistic proxy for
-reference-conditioning quality that future work in this space should not
-rely on alone.
+bands -- a null that replicates on a second held-out subject set. An
+apparent 8.6$\times$ defect-rate gradient across the same bands,
+CI-decisive on the first set, did not survive our own audit: it fails
+to replicate cross-set, and a confound-free re-run of its reference arm
+(matched training manifest, no generation-style prefix) erases it on
+the original set, with subject-clustered CIs disjoint from the original
+value. We report the full audit trail -- the failed hypothesis and the
+self-refuted gradient -- as evidence that identity-match-only,
+single-set, single-protocol evaluation is a systematically optimistic
+basis for reference-conditioning claims.
 \end{abstract}
 
 \input{aaai_draft/00_intro}
