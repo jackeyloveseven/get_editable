@@ -361,7 +361,13 @@ no per-subject training, plugged into a frozen SDXL backbone via diffusers'
 native `load_ip_adapter()` — same "call diffusers, don't modify it" constraint
 this work follows. Same 30 held-out subjects, same `prompt_B` structural-tag
 captions, same defect-aware Gemini 3.1 Pro judge prompt as Section 4.3
-(`probe/42_baseline_ipadapter.py`, `38_gemini_judge.py --set ipadapter`).
+(`probe/42_baseline_ipadapter.py`, `38_gemini_judge.py --set ipadapter`). **We
+are explicit that this, too, is not an architecture- or domain-controlled
+comparison**: it runs on IP-Adapter's own SDXL backbone, not this work's
+Z-Image, and the `plus-face` checkpoint was trained on real faces, not anime
+— it is the same-*method*-class reference point (a trained, purpose-built
+adapter) the field would reach for, not an isolated-variable ablation against
+our backbone.
 
 A second baseline was added in this round: `conradlocke/krea2-identity-edit`
 v1.1, a community LoRA on `krea/Krea-2-Turbo` (a 12.9B general-domain MMDiT
@@ -531,14 +537,17 @@ complementary rather than one strictly subsuming the other.
   probe set disjoint from both `gen10` and `holdout30` to avoid
   recontaminating the one validation set that has already produced a
   trustworthy number.
-- Two baselines have been run (Section 4.4): IP-Adapter-SDXL (a same-class,
-  general adapter) and krea2-identity-edit (a purpose-trained in-context
-  adapter on a much larger, general-domain base — not an
-  architecture-matched comparison, included as the strongest available bar
-  for this task the project could find and run at zero additional training
-  cost). AnimeAdapter (no public weights) and FreeGraftor/UNO (gated
-  FLUX.1-dev dependency, no accepted-license token available) remain future
-  work and would be the architecture-matched (same-domain and/or
+- Two baselines have been run (Section 4.4): IP-Adapter-SDXL (a same-*method*-
+  class, general adapter, but on its own SDXL backbone and never adapted to
+  anime — off-architecture and off-domain relative to this work) and
+  krea2-identity-edit (a purpose-trained in-context adapter on a much larger,
+  general-domain base — also off-architecture). **Neither baseline is an
+  architecture- or domain-controlled comparison**; both are included as the
+  strongest available bars for this task the project could find and run at
+  zero additional training cost, not as isolated-variable ablations against
+  our Z-Image backbone. AnimeAdapter (no public weights) and FreeGraftor/UNO
+  (gated FLUX.1-dev dependency, no accepted-license token available) remain
+  future work and would be the architecture-matched (same-domain and/or
   same-mechanism-family) comparisons this paper still lacks.
 
 ## 6. Production readiness

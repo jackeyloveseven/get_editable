@@ -79,12 +79,15 @@ recipe this work recommends for deployment}; \texttt{lowfreq}/band
 \subsection{Baseline comparison}\label{sec:baseline}
 
 IP-Adapter-SDXL (\texttt{ip-adapter-plus-face\_sdxl\_vit-h}, no per-subject
-training, same 30 held-out subjects) is the same-class trained-adapter
-baseline. \texttt{krea2-identity-edit} (community LoRA on the 12.9B
-general-domain Krea-2-Turbo, zero retraining by us) is a purpose-trained,
-architecturally distinct in-context adapter -- not an architecture-matched
-comparison, but the strongest publicly available bar we could run at zero
-additional training cost.
+training, same 30 held-out subjects) is the same-\emph{method}-class
+trained-adapter baseline -- its own SDXL backbone, not Z-Image, and never
+adapted to the anime domain it is tested on here, so this is a same-class
+reference point, not an architecture- or domain-controlled comparison.
+\texttt{krea2-identity-edit} (community LoRA on the 12.9B general-domain
+Krea-2-Turbo, zero retraining by us) is likewise purpose-trained and
+architecturally distinct. Neither baseline is architecture-matched to our
+Z-Image backbone; both are the strongest publicly available bars we could
+run at zero additional training cost.
 
 \begin{table}[t]
 \centering\small
