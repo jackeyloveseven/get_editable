@@ -1,0 +1,15 @@
+{
+  "model": "huskyi/gpt-image-2",
+  "base_url": "https://kaon-router.kaonai.com/v1",
+  "size_requested": "1536x1024",
+  "response_top_level_keys": [
+    "background",
+    "created",
+    "data",
+    "moderation",
+    "output_format",
+    "quality",
+    "size",
+    "usage"
+  ]
+}

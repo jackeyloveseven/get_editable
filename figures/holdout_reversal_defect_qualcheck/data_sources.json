@@ -1,0 +1,36 @@
+{
+  "judge_verdict_source": "data/gemini_judge_holdout.json",
+  "selection_filter": "new-arm visible_defect=yes AND same_character=yes; matching old-arm (same uid+seed) visible_defect=no AND same_character=yes",
+  "all_qualifying_pairs_found": ["7122_s0", "7122_s1", "7285_s0", "752_s1"],
+  "rows_used": ["7122_s0", "7285_s0", "752_s1"],
+  "rows": [
+    {
+      "row_label": "u7122_s0",
+      "reference": "/mnt/local/smoke_anime/anime_260623/img/u7122_ref.png",
+      "old": "/mnt/local/cherry_out/holdout30/u7122_holdout_old_s0.png",
+      "old_judge": {"same_character": "yes", "visible_defect": "no", "note": "All identity features match closely."},
+      "new": "/mnt/local/cherry_out/holdout30/u7122_holdout_new_s0.png",
+      "new_judge": {"same_character": "yes", "visible_defect": "yes", "note": "Severe collaged inset in top left corner showing headless torso."}
+    },
+    {
+      "row_label": "u7285_s0",
+      "reference": "/mnt/local/smoke_anime/anime_260623/img/u7285_ref.png",
+      "old": "/mnt/local/cherry_out/holdout30/u7285_holdout_old_s0.png",
+      "old_judge": {"same_character": "yes", "visible_defect": "no", "note": "Identity features match well; no significant rendering defects."},
+      "new": "/mnt/local/cherry_out/holdout30/u7285_holdout_new_s0.png",
+      "new_judge": {"same_character": "yes", "visible_defect": "yes", "note": "Severe collage defect with stacked duplicated images."}
+    },
+    {
+      "row_label": "u752_s1",
+      "reference": "/mnt/local/smoke_anime/anime_260623/img/u752_ref.png",
+      "old": "/mnt/local/cherry_out/holdout30/u752_holdout_old_s1.png",
+      "old_judge": {"same_character": "yes", "visible_defect": "no", "note": "Characters match well across all specified identity axes."},
+      "new": "/mnt/local/cherry_out/holdout30/u752_holdout_new_s1.png",
+      "new_judge": {"same_character": "yes", "visible_defect": "yes", "note": "Collaged inset top left."}
+    }
+  ],
+  "aggregate_defect_rates_shown_in_headers": {
+    "old_strip_band21-25": "20% [12,32] (n=60, Wilson 95% CI, from draft_v0.md Section 4.3)",
+    "new_lowfreq_band10-25": "82% [70,89] (n=60, Wilson 95% CI, from draft_v0.md Section 4.3)"
+  }
+}

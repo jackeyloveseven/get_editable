@@ -1,0 +1,46 @@
+{
+  "judge_verdict_source": "data/gemini_judge_band_0-29_r4_step4000.json",
+  "selection_filter": "visible_defect=yes, top 3 by note specificity out of 17 flagged in full-depth arm (not random)",
+  "rows": [
+    {
+      "row_label": "u5369_s0",
+      "reference": "/mnt/local/smoke_anime/anime_260623/img/u5369_ref.png",
+      "mid": {
+        "path": "/mnt/local/cherry_out/devprobe/base_rep30_step4000/u5369_lora_s0.png",
+        "judge": {"same_character": "partial", "visible_defect": "no", "note": "Hair style and length differ significantly."}
+      },
+      "full_depth": {
+        "path": "/mnt/local/cherry_out/devprobe/lora_ckptlink_band0-29_r4/u5369_lora_s0.png",
+        "judge": {"same_character": "yes", "visible_defect": "yes", "note": "Character matches well, but arm/hand anatomy is garbled."}
+      }
+    },
+    {
+      "row_label": "u5369_s1",
+      "reference": "/mnt/local/smoke_anime/anime_260623/img/u5369_ref.png",
+      "mid": {
+        "path": "/mnt/local/cherry_out/devprobe/base_rep30_step4000/u5369_lora_s1.png",
+        "judge": {"same_character": "partial", "visible_defect": "no", "note": "Face shape and hair styling are noticeably different."}
+      },
+      "full_depth": {
+        "path": "/mnt/local/cherry_out/devprobe/lora_ckptlink_band0-29_r4/u5369_lora_s1.png",
+        "judge": {"same_character": "yes", "visible_defect": "yes", "note": "Identity features match, but image 2 has severely garbled anatomy and clothing."}
+      }
+    },
+    {
+      "row_label": "u1740_s1",
+      "reference": "/mnt/local/smoke_anime/anime_260623/img/u1740_ref.png",
+      "mid": {
+        "path": "/mnt/local/cherry_out/devprobe/base_rep30_step4000/u1740_lora_s1.png",
+        "judge": {"same_character": "partial", "visible_defect": "no", "note": "Image 2 adds a scar, a mole, and changes the hairstyle entirely."}
+      },
+      "full_depth": {
+        "path": "/mnt/local/cherry_out/devprobe/lora_ckptlink_band0-29_r4/u1740_lora_s1.png",
+        "judge": {"same_character": "yes", "visible_defect": "yes", "note": "Hand grabbing the shirt is severely mangled."}
+      }
+    }
+  ],
+  "aggregate_rates_shown_in_headers": {
+    "mid_10-25_r8": "clean-yes 21.7% [13,34], defect 3.3% [1,11] (n=60, Wilson 95% CI)",
+    "full-depth_0-29_r4": "clean-yes 23.3% [14,35], defect 28.3% [19,41] (n=60, Wilson 95% CI)"
+  }
+}

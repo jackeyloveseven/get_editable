@@ -1,0 +1,542 @@
+{
+ "4073_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Different mask type; eyes covered vs exposed.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Pointy chin, structured jaw in both. Match.\n- Hair color: White/silver in both. Match.\n- Hair length/style: Spiky, pushed-up hair. Match.\n- Eye color: Not visible in Image 1 (covered by blindfold). Visible as green/dark in Image 2. Cannot definitively compare, but the blindfold style differs drastically.\n- Skin tone: Fair in both. Match.\n- Gender: Male in both. Match.\n- Distinctive marks: Image 1 has a full black blindfold covering the eyes completely. Image 2 has a domino-style black mask that exposes the eyes. This is a significant difference in a key defining feature.\n\n(2) Composition and defects:\n- Image 2 is a single coherent portrait. No tiled, duplicated, or collaged regions. No extra limbs or garbled anatomy.\n\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Different mask type; eyes covered vs exposed.\"}"
+ },
+ "9871_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Missing tattoo; eyes hidden by sunglasses.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1 has a standard anime face shape (round/pointed chin). Image 2 has a slightly more realistic, elongated face shape, but still anime-adjacent. Acceptable stylistic variation.\n- Hair color: Both have orange hair. Match.\n- Hair length/style: Both have long, flowing hair. Match.\n- Eye color: Image 1 has brown/purple eyes. Image 2's eyes are hidden behind sunglasses. N/A.\n- Skin tone: Both have fair skin. Match.\n- Gender: Both are female-presenting. Match.\n- Distinctive marks: Image 1 has a prominent black tattoo on her left shoulder. Image 2 does not show the left shoulder clearly, but there is no tattoo visible where the skin is shown. Image 1 has sunglasses on her head; Image 2 is wearing them. Partial match overall due to the missing tattoo and covered eyes.\n\n(2) Composition and defects:\nImage 2 is a single, coherent picture. The hand near the neck looks slightly anatomically vague, but it's not severely garbled or extra. No tiled, duplicated, or collaged elements.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.90,\"note\":\"Missing tattoo; eyes hidden by sunglasses.\"}\n```"
+ },
+ "9871_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.85,
+  "note": "Different eye color and hair length, but same hair color.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1 has a very anime-style face with a sharp chin and large eyes. Image 2 has a slightly more realistic/stylized face with different proportions. Match is partial at best.\n- Hair color: Both have orange/light orange hair. Match.\n- Hair length/style: Image 1 has long, flowing hair with straight bangs. Image 2 has shoulder-length, slightly wavy hair. Match is poor.\n- Eye color: Image 1 has brownish/purple eyes. Image 2 has yellowish/amber eyes. No match.\n- Skin tone: Both are fair-skinned. Match.\n- Gender: Both present as female. Match.\n- Distinctive marks: Image 1 has a tattoo on her left shoulder (Nami's tattoo). Image 2 does not show this area clearly, but has no visible tattoo. Image 1 has sunglasses on head, Image 2 wears glasses. \n\n(2) Composition and defects in image 2:\nImage 2 is a single coherent picture. There are some minor anomalies around the glasses (left lens frame is strange, right lens has an orange gradient or reflection) and the string/hair coming from the mouth area, but no major tiled, duplicated, or completely garbled anatomy to the level of a severe defect.\n\nConclusion: While hair color and gender match, the eye color, hair length, and general facial structure differ too much to consider it the same character without a doubt. It feels like a partial match or different character entirely.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.85,\"note\":\"Different eye color and hair length, but same hair color.\"}\n```"
+ },
+ "2636_ipadapter_s0": {
+  "same_character": "no",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Missing animal ears and different eye color.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1 is stylized anime with a relatively standard jaw. Image 2 is semi-realistic with a slightly longer face shape. Match is fair given style diffs.\n- Hair color: Both have white/silver hair. Match.\n- Hair length/style: Both have short, somewhat messy white hair. Match.\n- Eye color: Image 1 has red eyes. Image 2 has golden/brown eyes. Mismatch.\n- Skin tone: Both have pale skin. Match.\n- Gender: Both present female. Match.\n- Distinctive marks: Image 1 has large orange-tipped animal ears on top of the head. Image 2 lacks these animal ears entirely, showing normal human ears. Major mismatch.\n\n(2) Image 2 composition:\n- The image is a single coherent close-up portrait. No tiling, duplication, or anatomical defects are visible.\n\n{\"same_character\":\"no\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Missing animal ears and different eye color.\"}"
+ },
+ "2636_ipadapter_s1": {
+  "same_character": "no",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Hair length, eye color, and animal ears do not match.",
+  "_reasoning": "1. Identity axes:\n- Face shape: Image 1 has a standard anime face shape. Image 2 has a more semi-realistic/soft face shape, but mostly consistent for anime-style transfer.\n- Hair color: Image 1 has silver/white hair. Image 2 has silver/white hair. Match.\n- Hair length/style: Image 1 has short messy hair (chin/neck length). Image 2 has long flowing wavy hair reaching past the shoulders. Mismatch.\n- Eye color: Image 1 has red eyes. Image 2 has light brown/amber eyes. Mismatch.\n- Skin tone: Both have pale skin. Match.\n- Gender presentation: Both are female-presenting. Match.\n- Distinctive marks: Image 1 has prominent red/orange fox/animal ears on top of the head. Image 2 has some ear-like shapes peeking out on the sides, but they look more like elf ears or floral decorations, missing the distinct large animal ears on top. Mismatch.\n\n2. Composition/Defects (Image 2):\n- Image 2 is a single coherent portrait. No tiled or duplicated regions. No garbled anatomy visible. Normal art style.\n\nConclusion: Multiple mismatches (hair length, eye color, missing distinctive large animal ears).\n\n{\"same_character\":\"no\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Hair length, eye color, and animal ears do not match.\"}"
+ },
+ "1317_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Right side of image is garbled/collaged.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have a slender anime face shape. Match.\n- Hair color: Both have light blue hair. Match.\n- Hair length/style: Both have long hair with bangs down the forehead. Match.\n- Eye color: Both have red/orange eyes. Match.\n- Skin tone: Both are pale. Match.\n- Gender presentation: Both appear feminine/androgynous. Match.\n- Distinctive marks: None prominent in either, though the reference has slit pupils not clearly visible in the generated image, but overall identity is preserved.\n\n(2) Image 2 composition:\n- The image is split vertically. The main character is on the left. On the right, there is a detached, abstract or garbled section containing red scribbles in a white circle and some nonsensical shapes (looks like clothing/hair fragments). This is a severe rendering defect/collaged composition. Additionally, the character's hand on the left is slightly garbled.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Right side of image is garbled/collaged.\"}\n```"
+ },
+ "2542_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Hairstyle differs due to the added braid in image 2.",
+  "_reasoning": "(1) Identity Comparison:\n- Face shape: Both have a similar standard anime female face shape. Match.\n- Hair color: Both have brown hair. Match.\n- Hair length/style: Image 1 has hair tied in a bun with loose, straight framing strands falling to the front. Image 2 has a bun, but one of the front strands is distinctly braided with a red tie. Mismatch in style.\n- Eye color: Both have bright blue eyes. Match.\n- Skin tone: Fair in both. Match.\n- Gender presentation: Female in both. Match.\n- Distinctive marks: None in either. Match.\nResult: The character is largely the same, but the addition of the prominent braid changes the hairstyle significantly, making it a partial match.\n\n(2) Image 2 Defect Check:\nImage 2 is a single, coherent composition. There are no tiled or duplicated sub-regions. The anatomy (face, torso, arms folded at the bottom) is intact with no extra limbs, garbled features, or structural breakage.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Hairstyle differs due to the added braid in image 2.\"}\n```"
+ },
+ "1317_ipadapter_s1": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "All identity features match perfectly.",
+  "_reasoning": "1.  **Identity Axes Comparison:**\n    *   **Face shape:** Both have a typical anime face shape (pointed chin). Matches.\n    *   **Hair color:** Both have light blue hair. Matches.\n    *   **Hair length/style:** Both have long hair coming down the front with bangs framing the face, mostly covered by a white hood. Matches.\n    *   **Eye color:** Both have distinct red/orange eyes. Matches.\n    *   **Skin tone:** Both have fair skin. Matches.\n    *   **Gender presentation:** Both present as slightly androgynous/feminine anime characters. Matches.\n    *   **Distinctive marks:** None distinctly visible on the face/body itself in either image (ignoring outfit details). Matches.\n\n2.  **Image 2 Composition and Defects:**\n    *   The overall composition is a single coherent picture.\n    *   There are no tiled, duplicated, or collaged sub-regions.\n    *   The anatomy looks standard for the style, no extra limbs, eyes, or faces.\n    *   No visible rendering defects.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"All identity features match perfectly.\"}\n```"
+ },
+ "1620_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.9,
+  "note": "Garbled fingers on the hand holding the chin.",
+  "_reasoning": "1. Identity axes:\n- Face shape: Pointy chin in image 1. Pointy chin in image 2. Matches.\n- Hair color: Black in image 1, black in image 2. Matches.\n- Hair length/style: Long black hair with bangs in image 1. Long black hair with bangs in image 2. Matches.\n- Eye color: Dark (possibly reddish/brown) in image 1, mostly dark in image 2 (hard to see clearly but seems consistent).\n- Skin tone: Pale in both.\n- Gender presentation: Female in both.\n- Distinctive marks: Image 1 has glasses and a nosebleed. Image 2 has glasses, no nosebleed. Blood is temporary, glasses match. Both have glasses.\n\n2. Composition & defects in image 2:\n- The image is a single coherent picture.\n- Hand has minor anatomical issues (fused/weirdly shaped fingers near the mouth), but no gross extra limbs, no tiled/collaged regions. Hand is somewhat garbled.\n- Eyes look a bit cross-eyed/weirdly drawn behind glasses, but typical of AI. Hand is the main garbled anatomy. Let's count the hand as a rendering defect. Wait, the prompt says \"garbled or extra anatomy (limbs, eyes, faces)\". The hand near the chin is definitely quite garbled. I'll flag it as yes.\n\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.9,\"note\":\"Garbled fingers on the hand holding the chin.\"}"
+ },
+ "7577_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Missing signature large bun and headband.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have similar anime face proportions and sharp chin. Match.\n- Hair color: Both have black hair. Match.\n- Hair length/style: Image 1 has a large rounded bun/updo with a prominent green and yellow headband, and bangs. Image 2 has black hair with bangs, but the large signature bun and headband are completely missing. Only a small bun is visible at the very top. Not a match.\n- Eye color: Image 1 has pale/cloudy eyes. Image 2 has light green eyes with visible pupils. Match is questionable (Toph's eyes should be cloudy, but both are light).\n- Skin tone: Both are light-skinned. Match.\n- Gender: Both present as female. Match.\n- Distinctive marks: Image 1 shows Toph's signature headband. Image 2 is missing the headband but adds green drop earrings.\n\n(2) Image 2 composition and rendering:\n- The image is a single coherent portrait.\n- No tiled, duplicated, or collaged regions.\n- No garbled anatomy.\n\nThe missing signature hair bun and headband significantly affect the character's recognizable identity, making it a partial match at best.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Missing signature large bun and headband.\"}\n```"
+ },
+ "7577_ipadapter_s1": {
+  "same_character": "no",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Different hairstyle and eye color; missing blind eyes and large bun.",
+  "_reasoning": "1. Identity axes:\n- Face shape: Image 1 has a profile view with a strong jawline, Image 2 has a more delicate anime face shape. Partially matches.\n- Hair color: Both have black hair. Matches.\n- Hair length/style: Image 1 features a very distinctive massive bun with a green headband and yellow tassels, plus short bangs. Image 2 has a green headband but lacks the massive bun, instead showing loose pigtails/bunches. Different.\n- Eye color: Image 1 has pale, clouded eyes (blind). Image 2 has bright amber/brown eyes with pupils. Different.\n- Skin tone: Both have fair to light skin. Matches.\n- Gender presentation: Both female. Matches.\n- Distinctive marks: Image 1 has the headband with tassels. Image 2 has a simpler headband and earrings. Different.\n\n2. Composition/Defects in Image 2:\n- The image is a single coherent portrait.\n- No tiled, duplicated, or collaged regions.\n- Anatomy is normal (face, neck, shoulders).\n\n{\"same_character\":\"no\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Different hairstyle and eye color; missing blind eyes and large bun.\"}"
+ },
+ "2542_ipadapter_s1": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Matches well except hair is in ponytail instead of bun.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have similar anime face shapes, round cheeks, small chin. Match.\n- Hair color: Both have brown hair. Match.\n- Hair length/style: Image 1 has hair tied up in a bun with long side bangs. Image 2 has hair in a ponytail with side bangs. Not a perfect match in styling, but close enough in overall appearance.\n- Eye color: Both have blue eyes. Match.\n- Skin tone: Both have light skin. Match.\n- Gender: Both present as female. Match.\n- Distinctive marks: Neither has distinctive marks. Match.\nOverall, the character identity matches closely, just a slight variation in the hair tie style (bun vs ponytail).\n\n(2) Composition and defects (Image 2):\n- The image is a single coherent portrait.\n- No tiled or duplicated sub-regions.\n- No extra limbs, eyes, or faces.\n- No obvious rendering defects.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Matches well except hair is in ponytail instead of bun.\"}\n```"
+ },
+ "4073_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Missing the iconic black blindfold",
+  "_reasoning": "(1) Identity axes:\nFace shape: Image 1 has a mature, relatively sharp anime male face. Image 2 has a slightly younger, but similar anime male face shape.\nHair color: Image 1 has white/light silver hair. Image 2 has white/light silver hair. Match.\nHair length/style: Image 1 has short, spiky white hair sweeping up. Image 2 has short, spiky white hair pointing slightly down/forward. Very similar base hair.\nEye color: Image 1 has eyes covered by a blindfold. Image 2 has light blue eyes visible.\nSkin tone: Both have fair skin. Match.\nGender presentation: Both are male. Match.\nDistinctive marks: Image 1 has a very prominent black blindfold covering the eyes. Image 2 does NOT have a blindfold, the eyes are fully visible. This is a major identity mismatch for this character design.\n\n(2) Composition and rendering defects in image 2:\nImage 2 is a single coherent picture. The hands are a bit vaguely drawn, but there are no tiled, duplicated, or collaged sub-regions, and no grotesque anatomical failures like extra limbs or faces.\n\nConclusion: The characters share hair color and gender, but the missing blindfold is a key distinctive feature that is lost.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Missing the iconic black blindfold\"}\n```"
+ },
+ "3090_ipadapter_s1": {
+  "same_character": "no",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Different eye colors (heterochromia vs blue), different hairstyle, garbled hands.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1 has a rounder, softer anime face. Image 2 has a sharper, more mature anime face.\n- Hair color: Silver/white in both. Matches.\n- Hair length/style: Image 1 has medium-long layered spiky hair with a distinctive ahoge (cowlick). Image 2 has very long flowing hair with side braids/twists and bangs, no ahoge. Different style.\n- Eye color: Image 1 has heterochromia (one blue, one green). Image 2 has both eyes blue. Different.\n- Skin tone: Light in both. Matches.\n- Gender presentation: Female in both. Matches.\n- Distinctive marks: Image 1 has one visible blue orb earring. Image 2 has two teardrop-shaped earrings with red ribbons.\n\n(2) Composition and defects in Image 2:\nThe overall composition is a single coherent picture. However, the hands/fingers at the bottom are severely garbled (extra, poorly formed, unnatural finger placements). So there is a visible defect.\n\n```json\n{\"same_character\":\"no\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Different eye colors (heterochromia vs blue), different hairstyle, garbled hands.\"}\n```"
+ },
+ "3090_ipadapter_s0": {
+  "same_character": "no",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Heterochromia is lost; image 2 is a split collage.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1 has a slightly rounded anime face. Image 2 has a slightly sharper but similar anime face shape. Match is okay.\n- Hair color: Both have silver/white hair. Match.\n- Hair length/style: Image 1 has long hair with a spiky, distinctive top cowlick/ahoge and flared side bangs. Image 2 has long wavy silver hair, but lacks the specific cowlick and flared side bangs structure.\n- Eye color: Image 1 has heterochromia (right eye blue, left eye green). Image 2 has both eyes blue (on the main face facing forward). Mismatch.\n- Skin tone: Both are fair-skinned. Match.\n- Gender: Both appear female. Match.\n- Distinctive marks: Image 1 has a single teal spherical earring on the right ear. Image 2 has teardrop/dangle earrings on both sides.\n\n(2) Composition/Defects in Image 2:\n- Image 2 has a clear split/collaged composition. There is a main character facing forward on the left/center, and a second iteration of the character's head and upper body viewed from the side on the right edge, overlapping and cut off. This is a tiled/collaged sub-region defect.\n\n```json\n{\"same_character\":\"no\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Heterochromia is lost; image 2 is a split collage.\"}\n```"
+ },
+ "5412_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Matches well; missing the stick in mouth but otherwise identical.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have a slender, slightly angular face with a similar jawline. Match.\n- Hair color: Both have light silver/ash-blonde hair. Match.\n- Hair length/style: Both have straight, bowl-cut style hair with bangs covering the forehead. Match.\n- Eye color: Both have dark/blueish-grey eyes. Match.\n- Skin tone: Both have a fair skin tone. Match.\n- Gender: Both present as male. Match.\n- Distinctive marks: The character in Image 1 has a lollipop stick/cigarette in his mouth, which is absent in Image 2. Both wear over-ear headphones (an accessory, but consistent). Overall, the facial features match well.\n\n(2) Composition and rendering defects in image 2:\n- The image is a single coherent composition.\n- The zipper parts on the hoodie are slightly messy, but not a severe anatomical or structural defect.\n- No tiled, duplicated, or collaged regions.\n- No garbled anatomy or extra limbs/faces.\n\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Matches well; missing the stick in mouth but otherwise identical.\"}"
+ },
+ "1620_ipadapter_s1": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Strong identity match across all main traits.",
+  "_reasoning": "(1) Identity axes comparison:\n- Face shape: Both have slender faces with pointed chins. Match.\n- Hair color: Black in both images. Match.\n- Hair length/style: Long, straight black hair with bangs in both. Match.\n- Eye color: Dark/reddish in image 1, dark in image 2. Consistent.\n- Skin tone: Pale in both. Match.\n- Gender presentation: Feminine to somewhat androgynous in both. Match.\n- Distinctive marks: Both wear glasses with dark frames. Match.\n\n(2) Image 2 composition and defects:\nThe composition is a single, coherent portrait. There are no tiled or duplicated sub-regions. While there is minor melting on the glasses frame, there is no garbled or extra anatomy (limbs, eyes, faces) that breaks the overall structure.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Strong identity match across all main traits.\"}\n```"
+ },
+ "4057_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.85,
+  "note": "Hair matches, but missing iconic helmet hiding the eyes.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1's face is mostly hidden by a large helmet, only the lower jaw/lips are visible. Image 2 shows a full face. Hard to directly compare face shape, but skin tone matches.\n- Hair color: Both have vibrant red hair. Match.\n- Hair length/style: Both have long, flowing red hair. Match.\n- Eye color: Image 1's eyes are hidden. Image 2 has brown eyes. N/A for matching.\n- Skin tone: Both appear to have pale/light skin. Match.\n- Gender: Both present as female. Match.\n- Distinctive marks: Image 1 wears a highly distinctive winged helmet that covers the eyes. Image 2 has a very different metallic headpiece/tiara on the side of the head, leaving the face completely visible. This is a significant difference in the defining accessories of the character (Malenia).\n\n(2) Image 2 composition:\n- The image is a single coherent portrait of a character's head and shoulders.\n- No tiled, duplicated, or collaged sub-regions.\n- No garbled anatomy or visible defects.\n\nVerdict: Partial match due to the hair matching but missing the iconic helmet that defines the character's face in the reference.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.85,\"note\":\"Hair matches, but missing iconic helmet hiding the eyes.\"}\n```"
+ },
+ "6021_ipadapter_s0": {
+  "same_character": "no",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Missing neck tattoo, wrong eye color, added chin mark. Image split in two.",
+  "_reasoning": "1. Identity Analysis:\n- Face Shape: Ref has a sharp, angular face with prominent cheekbones. Image 2 has similar sharp features.\n- Hair Color: Ref has black/dark hair with some lighter highlights/slicked back. Image 2 has dark brown/black hair. Match.\n- Hair Style: Ref is slicked back with an undercut/shaved sides. Image 2 has slicked back hair, but less clear on the sides due to cropping.\n- Eye Color: Ref has dark eyes (hard to tell, maybe grey/black). Image 2 has bright blue eyes on the left, grey/colorless on the right. Mismatch.\n- Skin Tone: Ref is pale. Image 2 is pale. Match.\n- Gender: Male in both. Match.\n- Distinctive Marks: Ref has a prominent black neck tattoo. Image 2 lacks the neck tattoo entirely. Both faces in Image 2 have a weird vertical line/mark on the chin, which is absent in Ref.\n\n2. Rendering Defects (Image 2):\n- Image 2 is composed of two large, disjointed faces side-by-side, split by a harsh white line down the middle. This is a tiled/collaged composition defect.\n\n{\"same_character\":\"no\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Missing neck tattoo, wrong eye color, added chin mark. Image split in two.\"}"
+ },
+ "4057_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Missing the signature full-face winged helmet, shows full face instead.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1's face is mostly hidden by a large helmet, only the lower jaw/lips are visible. Image 2 shows a full face with a different, smaller headpiece.\n- Hair color: Image 1 has red/crimson hair. Image 2 has red/crimson hair. Matches.\n- Hair length/style: Image 1 has long flowing hair. Image 2 has long flowing hair. Matches.\n- Eye color: Image 1 eyes are obscured by the helmet. Image 2 has greenish/grey eyes. N/A.\n- Skin tone: Image 1 has pale skin. Image 2 has pale skin. Matches.\n- Gender: Female presentation in both. Matches.\n- Distinctive marks (accessories): Image 1 has a very distinct, full-head winged valkyrie-style helmet that covers the eyes. Image 2 has a small, open-faced dark metal tiara/headband. They are completely different headpieces. The outfit is also completely different but we ignore that, however the headpiece is a major identity marker here.\n\n(2) Composition and rendering defects in Image 2:\nImage 2 is a single coherent portrait. No tiled, duplicated, or collaged sub-regions. Anatomy looks normal for the style. No visible defects.\n\nOverall, the character in image 2 is missing the signature full helmet from image 1, which heavily defines the character's visual identity (Malenia from Elden Ring), but shares the red hair and general female presentation. I'll rate this as \"partial\".\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Missing the signature full-face winged helmet, shows full face instead.\"}\n```"
+ },
+ "6021_ipadapter_s1": {
+  "same_character": "no",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Missing prominent neck tattoo, completely different hairstyle.",
+  "_reasoning": "1.  **Identity Axes Comparison:**\n    *   **Face shape:** Both images depict a male character with a sharp, angular face and pointed chin. They match well.\n    *   **Hair color:** Both appear to have dark hair, depicted with similar shading styles (mostly black/dark lines on a lighter base in this sketch style). Match.\n    *   **Hair length/style:** Image 1 has slicked-back hair. Image 2 has hair falling over the forehead in a distinct parted fringe style. They do *not* match.\n    *   **Eye color:** Both are depicted with black/dark eyes (limited palette). Match.\n    *   **Skin tone:** Both are very pale/white. Match.\n    *   **Gender presentation:** Both are male. Match.\n    *   **Distinctive marks:** Image 1 has a very prominent dark tattoo on the left side of his neck. Image 2 is missing this tattoo entirely. They do *not* match.\n\n2.  **Image 2 Composition and Defects:**\n    *   The image is a single coherent portrait.\n    *   There are no tiled, duplicated, or collaged sub-regions.\n    *   The anatomy is mostly fine for this style, no extra limbs or garbled features.\n\n```json\n{\"same_character\":\"no\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Missing prominent neck tattoo, completely different hairstyle.\"}\n```"
+ },
+ "2838_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Missing heterochromia, different hairstyle.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have a typical anime face shape. Match.\n- Hair color: Both have blonde hair. Match.\n- Hair length/style: Image 1 has long flowing blonde hair with an ahoge and bangs. Image 2 has long blonde hair tied up partially in a ponytail/half-up style with bangs. Partial match (different styling).\n- Eye color: Image 1 has heterochromia (one pink/purple eye, one cyan/blue eye). Image 2 has two bright blue eyes. Mismatch.\n- Skin tone: Fair skin in both. Match.\n- Gender: Female presentation in both. Match.\n- Distinctive marks: No obvious marks besides the heterochromia in Image 1, which is missing in Image 2.\n\n(2) Composition and defects:\n- Image 2 is a single coherent portrait. No tiled, duplicated, or collaged sub-regions. No obvious anatomical defects (only face and upper torso visible, look normal).\n\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Missing heterochromia, different hairstyle.\"}"
+ },
+ "6159_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.99,
+  "note": "Split image showing two portraits.",
+  "_reasoning": "1. Identity Assessment:\n- Face shape: Angular anime jawline in both, matching.\n- Hair color: Ash blonde/light spiky blonde in both, matching.\n- Hair length/style: Short, very spiky in all directions, matching.\n- Eye color: Red eyes in both, matching.\n- Skin tone: Fair skin in both, matching.\n- Gender presentation: Male in both, matching.\n- Distinctive marks: No prominent scars in either. The reference character (Katsuki Bakugo) features match well.\n\n2. Rendering Defect Assessment:\n- Image 2 has a very clear compositional defect. It is split vertically down the middle, showing two completely separate generated portraits of the character side-by-side. This is a tiled/collaged composition.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.99,\"note\":\"Split image showing two portraits.\"}\n```"
+ },
+ "6159_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Face shape is sharper/older; weird black artifact in hair.",
+  "_reasoning": "1. Identity Axes:\n- Face shape: Image 1 has a pointed chin with a slightly rounder, younger face structure. Image 2 has a very sharp, mature, elongated face shape. They are different in proportion and age presentation.\n- Hair color: Both have pale spiky blonde/ash-blonde hair. Match.\n- Hair length/style: Both feature explosive, spiky, voluminous hair. Match.\n- Eye color: Image 1 has red eyes. Image 2 has glowing red eyes. Match.\n- Skin tone: Both have light skin. Match.\n- Gender: Both present as male. Match.\n- Distinctive marks: Image 2 has some weird black mechanical/chitinous growth protruding from the front of the bangs/forehead over the right eye. Image 1 does not have this.\n\n2. Rendering Defects (Image 2):\n- The image is a single coherent composition.\n- The black object protruding from the bangs looks a bit like an artifact or garbled accessory, but structurally the anatomy of the face and torso is intact. No major tiled/collaged defects.\n\nConclusion: The character shares the hair, eye color, and general spiky look, but the face shape in image 2 is much sharper/older, and there's a weird black artifact attached to the hair/face that changes the design. Partial match.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Face shape is sharper/older; weird black artifact in hair.\"}\n```"
+ },
+ "9823_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.85,
+  "note": "Tiled image, skin tone mismatch, missing specific hair loopies.",
+  "_reasoning": "1.  **Identity Axes Comparison:**\n    *   **Face shape:** Image 1 has a rounder, softer face shape. Image 2 has a more angular, slightly sharper face shape, though still generally similar.\n    *   **Hair color:** Both have brown hair. Matches.\n    *   **Hair length/style:** Image 1 shows hair pulled back into a bun with two distinct front locks (hair loopies). Image 2 shows loose brown hair with some front strands, but lacks the specific bun and loopies styling.\n    *   **Eye color:** Both have blue eyes. Matches.\n    *   **Skin tone:** Image 1 has medium/tan skin. Image 2 has significantly lighter/paler skin. Does not match well.\n    *   **Gender presentation:** Both are female. Matches.\n    *   **Distinctive marks:** Image 1 has a specific bun accessory (yellow) and a choker with a blue pendant. Image 2 lacks the choker/pendant but has a yellow headband. The specific defining \"hair loopies\" (distinctive to the character, Katara) are missing or not prominent in Image 2.\n\n2.  **Image 2 Composition/Defects:**\n    *   Image 2 is clearly split vertically down the middle, showing two very similar but slightly different generated portraits side-by-side. This is a tiled/duplicated composition defect. The anatomy of the hands/arms in the second frame is also somewhat garbled.\n\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.85,\"note\":\"Tiled image, skin tone mismatch, missing specific hair loopies.\"}"
+ },
+ "9823_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Hair style and accessories differ significantly.",
+  "_reasoning": "1. Face shape: Image 1 shows a rounder, stylized face. Image 2 shows a slightly longer, more angular face, but generally consistent with the character's facial structure. (Match)\n2. Hair color: Image 1 has dark brown hair. Image 2 has medium brown hair. (Match)\n3. Hair length/style: Image 1 has hair pulled back with two strands framing the face, wearing a topknot. Image 2 has loose brown hair with some pieces framing the face, and a blue hair accessory. The distinctive hair loopies/strands and topknot are different/missing. (Partial Match)\n4. Eye color: Both images show blue eyes. (Match)\n5. Skin tone: Both images show a warm, tan skin tone. (Match)\n6. Gender: Both present as female. (Match)\n7. Distinctive marks: Both have a blue choker necklace. Image 1 has an Air Nomad necklace pendant. Image 2 has a blue heart pendant and a golden headband. (Partial Match)\n\nImage 2 Composition: Image 2 is a single, coherent portrait showing the character from the chest up. There are no tiled, duplicated, or collaged sub-regions. The anatomy is normal without extra limbs or facial features.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Hair style and accessories differ significantly.\"}\n```"
+ },
+ "7122_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.9,
+  "note": "Characters match well. Image 2 has garbled hand anatomy.",
+  "_reasoning": "1.  **Identity Axes:**\n    *   **Face Shape:** Image 1 shows a soft, rounded anime face profile. Image 2 shows a slightly sharper, more defined jawline, but still typical anime style. Mostly matches.\n    *   **Hair Color:** Image 1 has dark brown/black hair. Image 2 has dark brown/black hair. Matches.\n    *   **Hair Length/Style:** Image 1 has hair tied up in a ponytail with loose bangs/strands framing the face. Image 2 has a high ponytail with loose bangs framing the face. Matches.\n    *   **Eye Color:** Image 1 has greyish/brownish eyes. Image 2 has greyish eyes. Matches.\n    *   **Skin Tone:** Both have light skin tones. Matches.\n    *   **Gender Presentation:** Both appear female. Matches.\n    *   **Distinctive Marks:** Image 2 has a beauty mark under the left eye; Image 1 does not appear to have this.\n\n2.  **Composition & Rendering Defects (Image 2):**\n    *   The image is a single coherent composition. There are no tiled or collaged sub-regions.\n    *   Looking closely at the hand raised to the face: the anatomy is slightly garbled, with ambiguous finger structures blending together. Also, the wrist area has strange bands/cuffs that merge oddly with the forearm anatomy. There is a visible rendering defect in the hand.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.90,\"note\":\"Characters match well. Image 2 has garbled hand anatomy.\"}\n```"
+ },
+ "7122_ipadapter_s1": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Characters match well across all identity axes.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have a slender anime face shape. Match.\n- Hair color: Both have dark brown/black hair. Match.\n- Hair length/style: Both have long hair tied in a high ponytail with bangs. Match.\n- Eye color: Both have greyish eyes. Match.\n- Skin tone: Both have fair skin. Match.\n- Gender presentation: Both appear female. Match.\n- Distinctive marks: None prominent in either that contradict. Match.\n\n(2) Image 2 composition:\n- The image is a single coherent portrait of a character. No tiled, duplicated, or collaged sub-regions. No garbled anatomy.\n\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Characters match well across all identity axes.\"}"
+ },
+ "9564_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Matches core traits including the black glasses.",
+  "_reasoning": "1. Face shape: Both images show a male with a relatively angular, sharp jawline. Matches.\n2. Hair color: Both have black hair. Matches.\n3. Hair length/style: Both have short, somewhat messy black hair falling slightly over the forehead. Matches.\n4. Eye color: Both have dark eyes (grey/black). Matches.\n5. Skin tone: Both have pale skin. Matches.\n6. Gender presentation: Both are male. Matches.\n7. Distinctive marks: Both characters wear thick, black-rimmed glasses. The reference image has some subtle marks/smudges on the face (possibly blood or dirt near the mouth/cheek), which are absent in the generated image. However, the core design features (glasses) match well.\n\nImage 2 composition: It is a single coherent portrait of a character. There are no tiled/duplicated regions or severe anatomical garbling. The background is stylized with brushstrokes, but that is not a defect.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Matches core traits including the black glasses.\"}\n```"
+ },
+ "9564_ipadapter_s1": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Characters match very well across all main identity axes.",
+  "_reasoning": "(1) Identity axes:\nFace shape: Image 1 has a mature, slightly angular face with a sharp jawline. Image 2 has a very similar angular jawline. (Match)\nHair color: Both have black hair. (Match)\nHair length/style: Both have short-to-medium messy black hair with bangs partially covering the forehead. (Match)\nEye color: Image 1 has dark grey/black eyes. Image 2 has dark grey/black eyes. (Match)\nSkin tone: Both have pale skin. (Match)\nGender: Both are male. (Match)\nDistinctive marks: Both wear similar large, black-framed glasses. Image 1 has a slight reddish mark/bruise near the mouth, which Image 2 lacks, but it's minor. (Overall match)\n\n(2) Composition and rendering defects in image 2:\nImage 2 is a single coherent portrait. There are no tiled/duplicated sub-images, garbled anatomy, or broken compositions.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Characters match very well across all main identity axes.\"}\n```"
+ },
+ "9151_ipadapter_s0": {
+  "same_character": "no",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Split image composition, incorrect eye color, missing signature accessories.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1 is a young anime female. Image 2 shows two similar faces, both matching the young female aesthetic.\n- Hair color: Image 1 is blonde/orange. Image 2 is also blonde/orange. Match.\n- Hair length/style: Image 1 has short spiky up-do hair. Image 2 left has short hair, right has long flowing hair. Partial match/inconsistent.\n- Eye color: Image 1 has amber/golden eyes. Image 2 left has red/white eyes (no pupils), right has pale/blank eyes. No match.\n- Skin tone: Both are light-skinned. Match.\n- Gender: Female in both. Match.\n- Distinctive marks: Image 1 has a large round hair accessory, a choker with a bow, and red tattoos/paint on the shoulder/arm. Image 2 has flower decals on the face, different jewelry, no arm tattoos visible. No match.\n\n(2) Composition and defects:\n- Image 2 is split down the middle, showing two distinct side-by-side portraits (a tiled/collaged composition). Both faces have severe eye rendering defects (blank white sclera with floating red pupils on the left, completely blank pale eyes on the right). \n\n```json\n{\"same_character\":\"no\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Split image composition, incorrect eye color, missing signature accessories.\"}\n```"
+ },
+ "9151_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.85,
+  "note": "Tattoos are placed on the face instead of the arm.",
+  "_reasoning": "1. **Identity Axes:**\n- **Face shape:** Image 1 has a rounder, softer anime face. Image 2 has a slightly more elongated, defined face shape. They are reasonably similar within style variations.\n- **Hair color:** Both have blonde/light orange hair.\n- **Hair length/style:** Image 1 has a tied-up style with spiky bits, side bangs, and specific hair accessories. Image 2 has a similar blonde base but the styling is looser, and the accessories are placed differently.\n- **Eye color:** Both have golden/orange eyes.\n- **Skin tone:** Both have light skin.\n- **Gender:** Both appear female.\n- **Distinctive marks:** Image 1 has a goldfish/flower tattoo on her left arm/shoulder area. Image 2 features somewhat garbled red/orange markings on the character's face/cheeks, rather than the arm.\n\n2. **Composition & Rendering Defects (Image 2):**\n- The overall composition is a single portrait.\n- There are no tiled or duplicated sub-regions.\n- There are no extra limbs or faces, though the eyes look slightly misaligned/uncanny and the facial markings are a bit messy. No major structural defects are present.\n\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.85,\"note\":\"Tattoos are placed on the face instead of the arm.\"}"
+ },
+ "5412_ipadapter_s1": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Matches well; missing the stick/lollipop but overall identity is consistent.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have a slender, slightly pointed chin and similar jawline. Match.\n- Hair color: Both have light silver/grey/blonde-ish hair. Match.\n- Hair length/style: Both have straight hair with bangs covering the forehead, neatly cut around the ears/neck. Match.\n- Eye color: Both have dark/blue-grey eyes. Match.\n- Skin tone: Both have a fair/pale skin tone. Match.\n- Gender presentation: Both appear male. Match.\n- Distinctive marks: The character in image 1 wears over-ear headphones and has a stick/lollipop in his mouth. Image 2 has the headphones but lacks the stick. Minor difference, but core identity matches.\n\n(2) Image 2 composition and rendering:\n- The image is a single coherent portrait of the character.\n- No tiled, duplicated, or collaged regions.\n- No extra limbs or garbled anatomy (face and shoulders look normal).\n- No visible rendering defects.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Matches well; missing the stick/lollipop but overall identity is consistent.\"}\n```"
+ },
+ "9624_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.85,
+  "note": "Different eye color and missing the distinct spade tattoo on the cheek.",
+  "_reasoning": "1. Identity axes:\n- Face shape: Image 1 has a sharper anime chin/jaw. Image 2 has a slightly softer, rounder face. Mostly consistent anime style.\n- Hair color: Brown/dark brown in both. (Match)\n- Hair length/style: Long dark hair with straight bangs in both. (Match)\n- Eye color: Dark/black eyes in Image 1. Purple eyes in Image 2. (Mismatch)\n- Skin tone: Pale in both. (Match)\n- Gender: Female in both. (Match)\n- Distinctive marks: Image 1 has a prominent black spade tattoo under the left eye, and extensive black body tattoos. Image 2 has strange abstract black dots/shapes on her cheeks/nose, but not the specific spade under the eye. (Mismatch)\n\n2. Composition & Rendering defects (Image 2):\n- Image 2 is a single portrait. There are no tiled/duplicated sub-regions, extra limbs, or extra faces. The nose rendering has a slightly odd black mark, but overall it is structurally coherent as a single portrait. No major defects.\n\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.85,\"note\":\"Different eye color and missing the distinct spade tattoo on the cheek.\"}"
+ },
+ "2028_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Missing glowing eye wisps from reference.",
+  "_reasoning": "1. Face shape: Image 1 has a standard anime face shape with a slightly pointed chin. Image 2 also has a standard anime face shape. They match.\n2. Hair color: Both have black hair. They match.\n3. Hair length/style: Image 1 has long, somewhat messy/layered hair with bangs. Image 2 has long, slightly wavy hair with bangs. The basic style is a close match.\n4. Eye color: Both have striking red eyes. They match.\n5. Skin tone: Both have pale skin. They match.\n6. Gender: Both present as female. They match.\n7. Distinctive marks: Image 1 has glowing red wisps coming from her eyes/forehead, and a red hair accessory partially visible at the back. Image 2 has a prominent red bow in her hair and a detailed necklace. The glowing eye wisps from Image 1 are missing in Image 2. Image 2 adds a large bow. This is a partial match or missing distinctive feature.\n\nComposition of Image 2: It is a single, coherent portrait without tiled regions or extra limbs/anatomy. No visible rendering defects.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Missing glowing eye wisps from reference.\"}\n```"
+ },
+ "9624_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Missing the distinctive spade cheek tattoo and heavy body tattoos.",
+  "_reasoning": "1. Identity Axes:\n- Face shape: Image 1 has a typical anime face shape. Image 2 has a slightly more detailed/semi-realistic anime face shape, but generally matches.\n- Hair color: Image 1 is dark brown/black. Image 2 is brown/pinkish-grey. (Partial match).\n- Hair length/style: Both have long straight hair with straight bangs. (Matches).\n- Eye color: Image 1 has brown/dark eyes. Image 2 has reddish-brown/pink eyes. (Partial match).\n- Skin tone: Both are fair. (Matches).\n- Gender: Both present as female. (Matches).\n- Distinctive marks: Image 1 has extensive body tattoos, including a prominent spade on her cheek. Image 2 has some random patterns on her cheek that do not form a spade, and some faint reddish marks on her shoulder, missing the heavy black body tattoos. (Mismatch).\n\n2. Composition/Defects in Image 2:\n- The image is a single coherent portrait. No tiled, duplicated, or collaged sub-regions. Anatomy (hands, face) looks normal within stylistic bounds. No visible defects.\n\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.90,\"note\":\"Missing the distinctive spade cheek tattoo and heavy body tattoos.\"}"
+ },
+ "2838_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.9,
+  "note": "Heterochromia missing in image 2; image 2 is vertically split/duplicated.",
+  "_reasoning": "(1) Identity comparison:\n- Face shape: Both have standard anime faces with pointed chins. Matches.\n- Hair color: Both have long blonde hair. Matches.\n- Hair length/style: Long hair with bangs in both. Matches.\n- Eye color: Image 1 has one pink/purple eye and one bright blue eye (heterochromia). Image 2 has two blue eyes. Mismatch.\n- Skin tone: Light/fair in both. Matches.\n- Gender presentation: Female in both. Matches.\n- Distinctive marks: No other marks, but the eye color difference is significant.\n\n(2) Image 2 composition:\nImage 2 is not a single coherent picture. It is split vertically down the middle by a thick white bar, creating two duplicated side-by-side portraits of the character. This is a severe collaged/tiled composition defect.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.9,\"note\":\"Heterochromia missing in image 2; image 2 is vertically split/duplicated.\"}\n```"
+ },
+ "7285_ipadapter_s1": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Identity traits match perfectly across both images.",
+  "_reasoning": "1. **Identity Axes Comparison:**\n- **Face shape:** Both have a delicate, slightly oval face shape with a pointed chin. (Match)\n- **Hair color:** Both have black hair. (Match)\n- **Hair length/style:** Both have long, thick, wavy hair parted similarly. (Match)\n- **Eye color:** Both have dark (black/dark brown) eyes. (Match)\n- **Skin tone:** Both have a fair, slightly warm skin tone. (Match)\n- **Gender:** Both present as female. (Match)\n- **Distinctive marks:** Both wear earrings and a pendant necklace, though the exact jewelry designs differ. No distinct facial markings or scars. (Match)\n\n2. **Image 2 Composition & Defects:**\n- Image 2 is a single, coherent portrait. There are no tiled or duplicated regions, and the anatomy (face, neck, shoulders) is normally structured without any extra or garbled features. No visible defects detected.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Identity traits match perfectly across both images.\"}\n```"
+ },
+ "2028_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Matches well but lacks the glowing eye trails from reference.",
+  "_reasoning": "1. Identity:\n- Face shape: Both have an anime-style face shape with a pointed chin. Matches.\n- Hair color: Both have very dark/black hair. Matches.\n- Hair length/style: Both have long, messy/layered black hair. Image 1 has a red bow/ribbon partially visible in the back, Image 2 has a very prominent red bow on the side. The overall style is similar enough. Matches.\n- Eye color: Both have red eyes. Matches.\n- Skin tone: Both have pale skin. Matches.\n- Gender: Female in both. Matches.\n- Distinctive marks: Image 1 has glowing pink/red aura trails from the corners of her eyes. Image 2 lacks these glowing eye trails. Partial match.\n\n2. Composition & Rendering Defects (Image 2):\n- The image is a single coherent portrait. No tiled or duplicated sub-regions.\n- Anatomy: There are some messy line details around the neck and choker, but no extra limbs or eyes. The face is intact.\n\nConclusion: The character is a very strong match, missing only the magical glowing eye trails.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.90,\"note\":\"Matches well but lacks the glowing eye trails from reference.\"}\n```"
+ },
+ "7285_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Identity matches perfectly across all key traits. No defects.",
+  "_reasoning": "(1) Identity axes comparison:\n- Face shape: Both have soft, relatively round faces with slightly pointed chins. Match.\n- Hair color: Both have black hair. Match.\n- Hair length/style: Both have long, flowing dark hair parted to one side. Match.\n- Eye color: Both have dark/black eyes. Match.\n- Skin tone: Both have a light/fair complexion. Match.\n- Gender presentation: Female in both. Match.\n- Distinctive marks: Different jewelry (hoops vs dangling earrings), but no conflicting permanent marks.\nOverall, the identity matches well despite the style difference.\n\n(2) Image 2 composition:\nThe image is a single coherent composition. There are no tiled or duplicated regions, and the anatomy appears normal without extra limbs or garbled features.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Identity matches perfectly across all key traits. No defects.\"}\n```"
+ },
+ "192_ipadapter_s1": {
+  "same_character": "no",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Wrong eye color and missing black eye mask; generated character has a mouth mask instead.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1 has an angular face. Image 2 has a slightly different angular face, mostly obscured by a mask.\n- Hair color: Image 1 is pale blonde/ash blonde. Image 2 is pale blonde. Match.\n- Hair length/style: Image 1 has spiky, explosive hair. Image 2 has spiky hair, but it's a bit softer and less voluminous on the sides, more concentrated on top. Partial match.\n- Eye color: Image 1 has red eyes. Image 2 has dark grey/greenish eyes. No match.\n- Skin tone: Both have light skin. Match.\n- Gender: Both appear male. Match.\n- Distinctive marks: Image 1 has a black mask around the eyes (domino-style). Image 2 has a white mechanical respirator over the mouth and lower face, and no eye mask. Complete mismatch on distinctive features.\n\n(2) Composition and defects:\n- Image 2 is a single coherent picture. No tiled/duplicated sub-regions, extra limbs, or broken composition.\n\nResult: The hair color and spiky style are similar, but the eye color and distinctive facial mask are completely wrong.\n```json\n{\"same_character\":\"no\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Wrong eye color and missing black eye mask; generated character has a mouth mask instead.\"}\n```"
+ },
+ "192_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Missing signature black eye mask; collaged side-by-side composition.",
+  "_reasoning": "1.  **Identity Axes Comparison**:\n    *   **Face shape**: Image 1 shows an angular anime face. Image 2 shows similar angular anime faces. Match.\n    *   **Hair color**: Image 1 is ash-blonde/light blonde. Image 2 is ash-blonde/light blonde. Match.\n    *   **Hair length/style**: Image 1 is short, spiky, explosive. Image 2 is short, spiky. Match.\n    *   **Eye color**: Image 1 shows red/crimson eyes. Image 2 shows brownish/reddish eyes. Match/Close enough.\n    *   **Skin tone**: Image 1 is pale/fair. Image 2 is pale/fair. Match.\n    *   **Gender**: Image 1 is male. Image 2 is male. Match.\n    *   **Distinctive marks**: Image 1 has a black mask/marking over the eyes. Image 2 (left) has a fragmented black tattoo/mark on the cheek, missing the mask. Image 2 (right) has a tiny mark under the eye. The distinctive mask is missing/altered. Mismatch.\n\n2.  **Image 2 Composition & Rendering Defects**:\n    *   Image 2 is composed of two side-by-side panels (a split screen/collaged layout). This is a clear rendering defect based on the prompt instructions.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Missing signature black eye mask; collaged side-by-side composition.\"}\n```"
+ },
+ "2084_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Eye color and hairstyle differ significantly.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have similar pointed anime faces. Match.\n- Hair color: Both have white hair. Match.\n- Hair length/style: Image 1 has white hair tied in a thick braid over one shoulder, with a lily hair accessory on one side. Image 2 has white wavy/curly hair that is mostly loose, with multiple braided sections mixed in, a crown/headband element, and many pink flowers around the head. The specific hairstyle and accessories are different.\n- Eye color: Image 1 has pink/magenta eyes. Image 2 has brown/amber eyes. Mismatch.\n- Skin tone: Both have medium-dark/brown skin. Match.\n- Gender: Both appear feminine. Match.\n- Distinctive marks: Image 1 has a single lily accessory in the hair. Image 2 has many flowers, different eye color, and missing the prominent single thick braid style.\n\n(2) Composition and rendering:\nImage 2 is a single coherent picture. The hand has a slightly ambiguous structure (thumb seems fused or drawn weirdly), but it's not a severe defect like a garbled limb. No tiling or collaging.\n\nConclusion: Partial match due to different eye color and different hair style/accessories.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Eye color and hairstyle differ significantly.\"}\n```"
+ },
+ "2084_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.85,
+  "note": "Different eye color and hair style (single braid vs multiple). Mangled hand in image 2.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have a similar anime-style face shape. Match.\n- Hair color: Both have white hair. Match.\n- Hair length/style: Image 1 has a thick side braid. Image 2 has multiple small braids and very curly/wavy loose hair. Partial match/mismatch on the specific style.\n- Eye color: Image 1 has pinkish/magenta eyes. Image 2 has dark purple/grey eyes. Mismatch.\n- Skin tone: Both have darker/tanned skin. Match.\n- Gender presentation: Both present as female or feminine. Match.\n- Distinctive marks: Image 1 has a large lily-like flower on the right side of the head. Image 2 has a cluster of different flowers on the head and smaller flowers scattered throughout the hair. Partial match on the concept of floral hair accessories.\n\n(2) Image 2 Composition & Rendering defects:\nImage 2 is a single coherent picture. There are some slight rendering issues with the hand holding the hair/vine (fingers look a bit mangled/blended into the object), but no tiled/duplicated sub-images or majorly broken compositions. I will flag visible_defect as yes due to the mangled hand anatomy.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.85,\"note\":\"Different eye color and hair style (single braid vs multiple). Mangled hand in image 2.\"}\n```"
+ },
+ "7373_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Hair/face match well, but distinctive goggles are replaced by regular glasses.",
+  "_reasoning": "1. Face shape: Reference has a sharp, mature jawline with distinct cheekbones. Image 2 has a slightly softer but still angular anime face shape. They are reasonably similar, but the reference looks a bit older and more rugged.\n2. Hair color: Reference is blonde. Image 2 is blonde. Match.\n3. Hair length/style: Reference has short, swept-back blonde hair with a few loose strands hanging down. Image 2 has short, swept-back blonde hair, parted slightly differently, but very similar overall style. Match.\n4. Eye color: Reference's eyes are hidden behind goggles. Image 2 has blueish-grey eyes visible behind glasses. N/A for matching eye color.\n5. Skin tone: Reference is fair-skinned. Image 2 is fair-skinned. Match.\n6. Gender: Both present as male. Match.\n7. Distinctive marks: Reference has distinctive small round goggles with green lenses and side shields. Image 2 has standard wire-rimmed rectangular sunglasses with blue lenses. This is a significant accessory mismatch, altering the character's signature look.\n8. Composition (Image 2): Single coherent portrait. No visible defects, no tiling or garbled anatomy.\n\nOverall, the core physical traits (blonde hair, male, fair skin) match, but the distinctive goggles are missing/changed to regular sunglasses, making it only a partial match for the specific character's identity.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.90,\"note\":\"Hair/face match well, but distinctive goggles are replaced by regular glasses.\"}\n```"
+ },
+ "2794_ipadapter_s1": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.9,
+  "note": "Garbled hand anatomy in generated image.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Both have a similar rounded anime face shape with a slightly pointy chin. Match.\n- Hair color: Both have reddish-pink/auburn hair. Match.\n- Hair length/style: Both have long hair with bangs. The reference has a somewhat wavy style, while the generated image has straighter hair, but generally matches in length and having bangs. Match.\n- Eye color: Both have pinkish-red eyes. Match.\n- Skin tone: Both are pale. Match.\n- Gender: Both are female-presenting. Match.\n- Distinctive marks: No notable scars. \n\n(2) Image 2 composition and defects:\nImage 2 is a single coherent picture. However, there are rendering defects in the anatomy, specifically the hand holding the object near the face. The fingers are garbled, merging with the object and face, and there appear to be extra/malformed digits.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.9,\"note\":\"Garbled hand anatomy in generated image.\"}\n```"
+ },
+ "1839_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Eye color and earrings differ, leading to a partial match.",
+  "_reasoning": "(1) Identity Evaluation:\n- Face shape: Similar anime face shape, slightly pointier chin in image 2. Match.\n- Hair color: Dark brown/black in image 1, dark black/grey in image 2. Match.\n- Hair length/style: Medium layered with bangs in both. Match.\n- Eye color: Light grey/silver in image 1, light amber/brown in image 2. Mismatch.\n- Skin tone: Light/pale in both. Match.\n- Gender presentation: Female in both. Match.\n- Distinctive marks: Image 1 has diamond-shaped earrings. Image 2 has different curved earrings. Mismatch.\n\n(2) Composition/Defect Evaluation (Image 2):\nImage 2 is a single coherent picture with no tiled regions, duplicated parts, or garbled anatomy.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Eye color and earrings differ, leading to a partial match.\"}\n```"
+ },
+ "5458_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Missing facial scars and iconic front hair lock. Severely mangled hand.",
+  "_reasoning": "1. Identity axes:\n- Face shape: Image 1 has a pointed anime chin and sharp jawline. Image 2 has a very similar sharp chin and jawline. Matches.\n- Hair color: Both have white hair (Image 1 has a blue gradient on a front strand, Image 2 lacks this specific blue gradient on the hair, but the main color matches).\n- Hair length/style: Image 1 has spiked up white hair with a prominent front lock. Image 2 has spiky swept back white hair, but lacks the iconic long front lock falling between the eyes.\n- Eye color: Both have red eyes. Matches.\n- Skin tone: Both are light-skinned. Matches.\n- Gender: Both appear male. Matches.\n- Distinctive marks: Image 1 has prominent lightning-like scar marks above the left eye (viewer's right). Image 2 lacks these scars entirely. Image 1 also has a blue gradient on the long front hair piece which is missing in 2.\n\n2. Rendering defects (Image 2):\n- The hand in front of the face has severe anatomical issues: fingers are merging, mangled, extra/broken joints, and weird blue artifacting on the pinky/ring finger area.\n- The composition is a single coherent picture otherwise, but the hand is highly garbled.\n\nConclusion: Partial match. The overall character looks similar (Senku from Dr. Stone), but missing the defining scars and the iconic long front hair piece with the green/blue tip. Visible defect present (mangled hand).\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Missing facial scars and iconic front hair lock. Severely mangled hand.\"}\n```"
+ },
+ "5458_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.9,
+  "note": "Missing facial scars, garbled artifacts on face.",
+  "_reasoning": "1.  **Identity Axes:**\n    *   **Face Shape:** Image 1 has a pointed chin and sharp jawline. Image 2 has a similarly sharp face shape. Matches.\n    *   **Hair Color:** Image 1 has white/light gray hair with a green/teal gradient at the tips of the front bangs. Image 2 has white/light gray hair, but the front bangs lack the prominent green/teal gradient (there's a slight blue tint on one strand, but it's not the same distinctive gradient). Partial match/mismatch on the gradient.\n    *   **Hair Length/Style:** Both have spiky, voluminous hair standing straight up, with two prominent bangs hanging down the front. Matches.\n    *   **Eye Color:** Image 1 has red eyes. Image 2 has red eyes. Matches.\n    *   **Skin Tone:** Both have pale/light skin. Matches.\n    *   **Gender Presentation:** Both present as male. Matches.\n    *   **Distinctive Marks:** Image 1 has prominent lightning-like scars on his face (above left eyebrow, below right eye/across nose). Image 2 lacks these scars entirely. It does have a strange gray band across the face, but not the specific scars. Mismatch.\n\n2.  **Composition/Defects (Image 2):**\n    *   The overall composition is a single coherent picture.\n    *   However, there are severe rendering defects on the face. There's a gray, metallic-looking band intersecting the right eye and nose, and a blue/teal marking awkwardly pasted on the left cheek. These look like garbled anatomy/artifacts.\n\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.90,\"note\":\"Missing facial scars, garbled artifacts on face.\"}"
+ },
+ "6556_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Minor differences in specific accessory designs.",
+  "_reasoning": "1. Identity Evaluation:\n- Face shape: Image 1 has a sharp, slightly elongated jawline. Image 2 has a similar sharp jawline. (Match)\n- Hair color: Image 1 has dark grey/black hair. Image 2 has black hair. (Match)\n- Hair length/style: Both have somewhat messy, medium-short hair with bangs covering part of the forehead. (Match)\n- Eye color: Image 1 has dark/greyish eyes (hard to see clearly, but dark). Image 2 has dark/black eyes. (Match)\n- Skin tone: Both have fair/light skin. (Match)\n- Gender: Both present as male. (Match)\n- Distinctive marks: Image 1 has glasses, a silver cross-like earring, and several rings. Image 2 has glasses, a different dangling earring, and a long hanging string/necklace element. The specific accessories differ slightly, but the overall look (glasses, dangling earring) is very similar. (Strong partial/match)\n\n2. Composition & Defect Evaluation (Image 2):\n- The image appears to be a single coherent composition. There are no tiled or duplicated sub-regions.\n- Anatomy: The hands and fingers intertwined near the face look slightly messy/unclear, but not severely garbled to the point of being a major defect (typical AI hand issues, but passable). No extra limbs or faces.\n- Overall, no severe rendering defects.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Minor differences in specific accessory designs.\"}\n```"
+ },
+ "1192_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Eye color mismatch. Huge ghost face duplicate on the left.",
+  "_reasoning": "(1) Identity axes:\nFace shape: Image 1 has a very round, stylized 3D face. Image 2 has a similar round face shape. Matches well.\nHair color: Both images show bright orange hair. Matches.\nHair length/style: Both have long orange hair with bangs. Image 2 matches the style.\nEye color: Image 1 has glowing white/reddish pupils (mostly white eyes). Image 2 has green eyes. Mismatch.\nSkin tone: Both have fair skin with freckles. Matches.\nGender presentation: Both are female-presenting. Matches.\nDistinctive marks: Both wear large black goggles on their head and headphones. Matches.\n\n(2) Composition and defects in Image 2:\nImage 2 features the main character in the center/right. However, on the left side of the image, there is a massive, faint, ghostly duplicate face/hair overlapping the background. This is a severe rendering defect (tiled/duplicated sub-image).\n\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Eye color mismatch. Huge ghost face duplicate on the left.\"}"
+ },
+ "6556_ipadapter_s1": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.9,
+  "note": "Identity matches well, but image 2 has garbled hand/arm anatomy.",
+  "_reasoning": "(1) Identity analysis:\n- Face shape: Both have a sharp, pointed chin and a slender male anime face. Match.\n- Hair color: Dark/black in both images. Match.\n- Hair length/style: Short, textured, with messy bangs over the forehead. Match.\n- Eye color: Dark in both images. Match.\n- Skin tone: Fair/pale in both. Match.\n- Gender presentation: Male in both. Match.\n- Distinctive marks: Both wear black-framed glasses and dangling earrings. Both feature rings/jewelry. Match.\n\n(2) Composition and defect analysis for image 2:\nThe image is a single composition. However, there are significant rendering defects in the anatomy. The hand near the neck/chin has mangled, extra, and poorly formed fingers. The character's right arm (viewer's left) has a strangely bent, structurally incorrect wrist/forearm area.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.9,\"note\":\"Identity matches well, but image 2 has garbled hand/arm anatomy.\"}\n```"
+ },
+ "1192_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.9,
+  "note": "Different eye color/style, missing headphones; garbled hands/arms in image 2.",
+  "_reasoning": "1.  **Identity Axes Comparison:**\n    *   **Face shape:** Image 1 has a very round, stylized 3D face. Image 2 has a slightly more pointed anime-style face. (Mismatch)\n    *   **Hair color:** Both have bright orange hair. (Match)\n    *   **Hair length/style:** Both have long hair with bangs. (Match)\n    *   **Eye color:** Image 1 has large glowing white eyes with tiny pinkish/red pupils. Image 2 has normal anime eyes with brown pupils/irises. (Mismatch)\n    *   **Skin tone:** Both have light skin. (Match)\n    *   **Gender presentation:** Both present as female. (Match)\n    *   **Distinctive marks/accessories:** Both have black goggles on their heads. Image 1 has large white headphones, which are mostly missing or heavily abstracted in Image 2 (just small white pieces near ears). Image 1 has freckles, Image 2 has very faint or no freckles. (Partial match)\n    *   **Overall Identity:** The eye color and face shape differences, along with missing accessories, make it a partial match.\n\n2.  **Image 2 Composition and Defects:**\n    *   The image shows a single character in a street scene.\n    *   Looking closely at the character's right side (viewer's left), there is a weird extra hand/arm segment growing out of her waist area.\n    *   On her left side (viewer's right), there's a strange disconnected hand near her waist, and the arm anatomy is garbled.\n    *   This is a rendering defect (garbled anatomy/extra limbs).\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.9,\"note\":\"Different eye color/style, missing headphones; garbled hands/arms in image 2.\"}\n```"
+ },
+ "752_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Hair style and glasses are similar, but eye color is different.",
+  "_reasoning": "```json\n{\"same_character\": \"partial\", \"hair_color_match\": \"yes\", \"gender_match\": \"yes\", \"visible_defect\": \"no\", \"confidence\": 0.9, \"note\": \"Hair style and glasses are similar, but eye color is different.\"}\n```"
+ },
+ "2794_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Tiled duplication defect, but identity features match perfectly.",
+  "_reasoning": "(1) Identity axes:\n- Face shape: Image 1 has a round anime face. Image 2 has a similar round/pointed anime face shape. (Match)\n- Hair color: Image 1 is vibrant pink/magenta. Image 2 is a similar pink/magenta. (Match)\n- Hair length/style: Image 1 has long hair with blunt bangs and some wavy ends. Image 2 has long hair with bangs. (Match)\n- Eye color: Image 1 has pink/red eyes. Image 2 has pink/red eyes. (Match)\n- Skin tone: Both are very pale. (Match)\n- Gender: Female in both. (Match)\n- Distinctive marks: None in Image 1. None in Image 2. (Match)\nOverall identity is a very strong match.\n\n(2) Composition and defects:\nImage 2 is clearly a tiled/split-screen composition showing the same character duplicated side-by-side. The left side shows one version of her, and the right side shows another slightly overlapping or cropped version with a hand floating weirdly. This is a severe rendering defect (tiled composition).\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Tiled duplication defect, but identity features match perfectly.\"}\n```"
+ },
+ "1839_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Eye color and earrings are different.",
+  "_reasoning": "(1) Identity Comparison:\n- Face shape: Image 1 has a standard soft anime face shape; Image 2 is slightly more angular but similar. Match.\n- Hair color: Both have dark brown/black hair. Match.\n- Hair length/style: Both have medium-length layered hair with messy bangs. Match.\n- Eye color: Image 1 has pale grey eyes; Image 2 has bright golden/amber eyes. Mismatch.\n- Skin tone: Both have fair/light skin. Match.\n- Gender presentation: Both appear feminine. Match.\n- Distinctive marks: Image 1 has long diamond-shaped earrings; Image 2 has chunky round/oval metallic earrings. Mismatch.\n\n(2) Defect Check (Image 2):\nThe image is a single coherent composition. There are no tiled or duplicated regions, and the anatomy (face, eyes, neck) appears normal without any garbled or extra parts.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Eye color and earrings are different.\"}\n```"
+ },
+ "752_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.95,
+  "note": "Eye color differs (green vs brown).",
+  "_reasoning": "(1) Identity axes:\nFace shape: Image 1 has a round, slightly soft anime face. Image 2 has a slightly more structured but similar anime face shape. Match.\nHair color: Image 1 has brown hair. Image 2 has brown hair. Match.\nHair length/style: Image 1 has long hair tied into twin braids. Image 2 has long hair tied into twin braids, plus a braided crown on top. Mostly matches.\nEye color: Image 1 has green eyes. Image 2 has brown eyes. Mismatch.\nSkin tone: Fair in both. Match.\nGender: Female presentation in both. Match.\nDistinctive marks: Image 1 wears round glasses and has light blush/freckles. Image 2 wears round glasses and has freckles. Match.\n\n(2) Composition and defects:\nImage 2 is a single coherent picture (a close-up portrait). There are no tiled, duplicated, or collaged regions, and no garbled anatomy.\n\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.95,\"note\":\"Eye color differs (green vs brown).\"}"
+ },
+ "5648_ipadapter_s0": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.9,
+  "note": "Image 2 is missing the distinctive mask seen in Image 1.",
+  "_reasoning": "1. Identity axes:\n- Face shape: Image 1 has a pale, mask-like face with distinct lines (looks like Michael Myers mask). Image 2 has a normal anime male face shape. They don't match.\n- Hair color: Both have black hair. Match.\n- Hair length/style: Both have short, somewhat messy black hair. Match.\n- Eye color: Both have black/solid dark eyes. Match.\n- Skin tone: Both are pale/monochrome. Match.\n- Gender: Both appear male. Match.\n- Distinctive marks: Image 1 is wearing a mask (the lines on the face indicate a mask edge, plus it's a known character). Image 2 just has a pale face with a few small scratch marks, but no mask lines. Mismatch.\n\n2. Composition: Image 2 is a single coherent picture, no rendering defects.\n\nConclusion: The character in Image 1 is wearing a mask (looks like Michael Myers from Dead by Daylight or Halloween), while Image 2 is just a regular anime boy with black eyes. They share features but the mask is missing.\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.9,\"note\":\"Image 2 is missing the distinctive mask seen in Image 1.\"}\n```"
+ },
+ "5648_ipadapter_s1": {
+  "same_character": "partial",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "no",
+  "confidence": 0.85,
+  "note": "Mask details from reference are mostly lost in generation.",
+  "_reasoning": "1.  **Identity Axes Comparison:**\n    *   **Face shape:** Both have an angular, somewhat mature face shape.\n    *   **Hair color:** Both have black/dark hair. Match.\n    *   **Hair length/style:** Both have short, somewhat messy/spiky dark hair pushed slightly back. Match.\n    *   **Eye color:** Both have solid black eyes/sclera. Match.\n    *   **Skin tone:** Both have very pale/white skin. Match.\n    *   **Gender presentation:** Both present as male. Match.\n    *   **Distinctive marks:** The reference image depicts a character wearing a mask (Michael Myers style), which creates distinct lines/seams on the face (jawline, neck). The generated image interprets this as a pale face with faint lines above the eyes but lacks the obvious mask-like seams and neck separation seen in the reference.\n\n2.  **Composition/Defects (Image 2):**\n    *   The image is a single coherent portrait.\n    *   No tiled, duplicated, or collaged regions.\n    *   Anatomy looks standard for the style. No obvious rendering defects.\n\n```json\n{\"same_character\":\"partial\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"no\",\"confidence\":0.85,\"note\":\"Mask details from reference are mostly lost in generation.\"}\n```"
+ },
+ "7373_ipadapter_s0": {
+  "same_character": "yes",
+  "hair_color_match": "yes",
+  "gender_match": "yes",
+  "visible_defect": "yes",
+  "confidence": 0.95,
+  "note": "Image 2 is duplicated side-by-side.",
+  "_reasoning": "Step 1:\n- Face shape: Both images show a male with a strong jawline and similar facial structure.\n- Hair color: Both have blonde hair. Match.\n- Hair length/style: Both have short blonde hair swept back with some strands falling forward. Match.\n- Eye color: Obscured by glasses in both images (the reference has round goggles with green lenses, the generated has rectangular sunglasses with green/dark lenses, but eye color itself is hidden). N/A.\n- Skin tone: Both have a fair/light skin tone. Match.\n- Gender: Male in both. Match.\n- Distinctive marks: The character wears distinctive eyewear. The reference has specific round goggles, while the generated image has different rectangular sunglasses. No other specific facial marks.\n\nStep 2:\n- Image 2 composition: The image is split down the middle with a white vertical line, showing two almost identical side-by-side versions of the character. This is a tiled/duplicated composition defect.\n\n```json\n{\"same_character\":\"yes\",\"hair_color_match\":\"yes\",\"gender_match\":\"yes\",\"visible_defect\":\"yes\",\"confidence\":0.95,\"note\":\"Image 2 is duplicated side-by-side.\"}\n```"
+ }
+}

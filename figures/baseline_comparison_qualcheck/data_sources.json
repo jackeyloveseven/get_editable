@@ -1,0 +1,56 @@
+{
+  "judge_verdict_sources": {
+    "strip_lowfreq": "data/gemini_judge_holdout.json",
+    "ipadapter": "data/gemini_judge_ipadapter.json",
+    "krea2": "data/gemini_judge_krea2.json"
+  },
+  "rows": [
+    {
+      "row_label": "u7122_s0",
+      "reference": "/mnt/local/smoke_anime/anime_260623/img/u7122_ref.png",
+      "strip": {
+        "path": "/mnt/local/cherry_out/holdout30/u7122_holdout_old_s0.png",
+        "judge": {"same_character": "yes", "visible_defect": "no", "note": "All identity features match closely."}
+      },
+      "lowfreq": {
+        "path": "/mnt/local/cherry_out/holdout30/u7122_holdout_new_s0.png",
+        "judge": {"same_character": "yes", "visible_defect": "yes", "note": "Severe collaged inset in top left corner showing headless torso."}
+      },
+      "ipadapter": {
+        "path": "/mnt/local/cherry_out/baseline_ipadapter/u7122_ipadapter_s0.png",
+        "judge": {"same_character": "yes", "visible_defect": "yes", "note": "Characters match well. Image 2 has garbled hand anatomy."}
+      },
+      "krea2": {
+        "path": "/mnt/local/cherry_out/baseline_krea2/u7122_krea2_s0.png",
+        "judge": {"same_character": "yes", "visible_defect": "no", "note": "Identities match well across all features."}
+      }
+    },
+    {
+      "row_label": "u5648_s0",
+      "reference": "/mnt/local/smoke_anime/anime_260623/img/u5648_ref.png",
+      "strip": {
+        "path": "/mnt/local/cherry_out/holdout30/u5648_holdout_old_s0.png",
+        "judge": {"same_character": "no", "visible_defect": "no", "note": "Image 2 lacks the iconic mask, pale skin, and black eyes."}
+      },
+      "lowfreq": {
+        "path": "/mnt/local/cherry_out/holdout30/u5648_holdout_new_s0.png",
+        "judge": {"same_character": "no", "visible_defect": "yes", "note": "Image 2 completely misses the iconic mask; severe collaged layout at the top."}
+      },
+      "ipadapter": {
+        "path": "/mnt/local/cherry_out/baseline_ipadapter/u5648_ipadapter_s0.png",
+        "judge": {"same_character": "partial", "visible_defect": "no", "note": "Image 2 is missing the distinctive mask seen in Image 1."}
+      },
+      "krea2": {
+        "path": "/mnt/local/cherry_out/baseline_krea2/u5648_krea2_s0.png",
+        "judge": {"same_character": "partial", "visible_defect": "no", "note": "Missing the iconic mask face, pale skin, and void eyes."}
+      }
+    }
+  ],
+  "aggregate_defect_rates_shown_in_headers": {
+    "strip": "20% [12,32] (n=60, Wilson 95% CI)",
+    "lowfreq": "82% [70,89] (n=60, Wilson 95% CI)",
+    "ipadapter": "33% (n=60)",
+    "krea2": "2% [0,9] (n=60, Wilson 95% CI)"
+  },
+  "note": "row2 uid (5648) chosen because draft_v0.md Section 4.4 prose already names it as krea2's characteristic failure example -- see INTENT.md"
+}
