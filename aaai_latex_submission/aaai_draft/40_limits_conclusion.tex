@@ -33,37 +33,48 @@ prefix-off -- inseparable there from ordinary run-to-run training
 variance. Absolute numbers are modest
 regardless of arm: 51.7--55.0\% clean-usable / ${\sim}20$\% clean-yes
 is not state-of-the-art accuracy in either line of this work; the
-contribution is the evaluation methodology and the honest ablation
-record. All experiments ran on a single 141GB-class GPU (LoRA training
-${\sim}4$--$6.5$h per arm; generation ${\sim}35$\,min per 60 images).
+contribution is the anatomy of the identity signal and the evaluation
+methodology, not benchmark accuracy. All experiments ran on a single
+141GB-class GPU (LoRA training ${\sim}4$--$6.5$h per arm; generation
+${\sim}35$\,min per 60 images).
+
+\paragraph{Scope of the distributed-identity claim.} The
+non-localization evidence is bounded by the handles we tested (continuous
+layer bands, reference-affinity head subsets, high-norm token sets,
+timestep gates); a finer or compositional handle could in principle
+localize identity, and we claim only that these natural handles do not.
+The two mechanisms are independent as \emph{interventions} but share
+evaluation \emph{instruments} (one judge, one CCIP stack, one anime data
+family), so their agreement is corroborative, not fully independent. The
+cross-architecture selectivity signature is correlational on $n{=}2$
+models -- a within-model RoPE-$\theta$ test was inconclusive by
+construction -- so we offer it as a diagnostic, not a cause. All evidence
+is single-domain (anime) on one main model; whether the account transfers
+to photographic identity or other DiT families is open, and contrary
+locality findings in prior work may reflect that setting difference.
 
 \section{Conclusion}\label{sec:conclusion}
 
 We activated a frozen, pure-T2I anime diffusion transformer as a
-reference-conditioned identity generator with two independent, cheap
-mechanisms -- zero-training attention KV injection and a
-0.06\%-parameter band-LoRA -- and found the same blind spot twice.
-Identity-match rate, the metric either mechanism's natural ablation would
-reach for first, is not merely incomplete but actively misleading: a
-training-free recipe with a higher raw identity-match rate has a
-held-out composition-defect rate 4$\times$ higher than its predecessor,
-and a training-light ablation finds identity-match flat across every
-tested layer position -- a null that replicated across two held-out
-subject sets -- while its one apparent positive effect, an 8.6$\times$
-defect-rate gradient, was refuted by our own cross-set replication and
-confound-free re-run. Neither mechanism beats a same-class
-baseline on any metric -- \texttt{strip} is statistically tied with
-IP-Adapter on strict identity accuracy at zero training cost, and the
-band-LoRA remains statistically tied with krea2-identity-edit's
-usable-output rate at a clean-protocol step6000 operating point
-(76.7\% [65,86] vs.\ 58.3\% [46,70]; step4000 scores 53.3\% [41,65]
-under the same protocol) at 0.06\% of its parameter count -- and we
-report both ties as ties, not wins. What remains open: the
-composition-collapse mode is mechanistically narrowed
-(position-encoding precision ruled out) but unfixed;
-geometric-attribute fidelity is a residual failure even for the
-recommended recipe. We report the pre-registered null result, and the
-audit that refuted our own strongest secondary finding, because
-reporting only what survived would misrepresent what the evidence
-actually supports -- the audit trail itself is the contribution we most
-hope future reference-conditioning work reuses.
+one-shot reference-conditioned identity generator two independent, cheap
+ways -- zero-training attention KV injection and a 0.06\%-parameter
+band-LoRA -- each statistically tied with a same-class trained baseline
+on identity (\texttt{strip} with IP-Adapter at zero training cost; the
+band-LoRA with krea2 at 0.06\% of its parameters), reported as ties, not
+wins, with a shuffled-reference control confirming the conditioning is
+genuinely reference-driven. Using these mechanisms as probes, our central
+finding is an anatomy: the one-shot identity signal in this frozen DiT is
+\emph{distributed and composition-entangled}. Within the handles we could
+test it is not localized -- to any layer band (a null replicated across
+two held-out subject sets and concurring across both mechanisms), head
+subset, or denoising phase -- and the collage defect is entangled with
+identity rather than separable from it, as five matched-control repairs
+each confirm by trading identity for coherence rather than removing the
+defect. A peaked-versus-diffuse attention-selectivity signature, offered
+as a cross-architecture diagnostic, further separates a model that
+transfers structured identity from one that transfers only mean color.
+Two measurement reversals along the way show that identity-match-only,
+single-set evaluation is systematically optimistic for this class of
+method. The composition-collapse mode is characterized but unfixed, and
+geometric-attribute fidelity remains a residual failure even for the
+recommended recipe.

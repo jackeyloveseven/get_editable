@@ -17,55 +17,65 @@ tensors into a restricted band of self-attention layers at inference
 time (zero training), and a rank-8 LoRA on 0.06\% of backbone parameters
 within the same layer band (minutes of training, not per-subject).
 
-Getting either mechanism to actually work exposes the same blind spot
-twice. Both mechanisms have a natural, cheap-to-measure headline metric
--- does the generated character look like the reference? -- and both
-times, optimizing or ablating against that metric alone would have led
-to the wrong conclusion. The training-free mechanism's naive
-position-preserving key injection causes literal copy-paste ``ghosting''
-because the reference and target token grids share the same RoPE
-coordinate origin; a frequency-gated fix removes the ghosting and *does*
-raise raw identity-match rate on a small development set (23\%$\to$40\%)
--- but held-out validation with a defect-aware judge shows the same
-recipe also raises a severe composition-collapse defect rate from 20\%
-to 82\%, so the rate of an actually usable image collapses from 53\% to
-15\%. The training-light mechanism's layer-position ablation was
-pre-registered to test whether a specific 16-layer band is uniquely
-responsible for identity-conditioning capacity; identity-match turns out
-to be statistically flat across every tested band (95\% CI overlapping,
-confirmed under subject-level clustering, and replicated on a second
-held-out subject set) -- the hypothesis fails. An apparent 8.6$\times$
-defect-rate gradient across the same bands then failed our own audit:
-it does not replicate cross-set, and removing a generation-protocol
-confound from its reference arm erases it on the original set.
+Both mechanisms reach that parity, which lets us ask a sharper question
+than ``does it work'': \emph{where} in the frozen transformer does the
+one-shot identity signal live, and can it be localized precisely enough
+to repair the one defect that dogs it? Within every handle we can test,
+it cannot -- the signal is not localized. Identity-match rate is
+statistically flat across four transformer-layer bands (a null that
+replicates on a second held-out subject set and holds for \emph{both} the
+injection and the trained mechanism), across attention-head subsets
+chosen by reference affinity (matched-count controls), and across
+denoising-timestep gates. The persistent tiled/``collage'' defect is
+entangled with this distributed identity rather than separable from it:
+five targeted repairs -- background isolation, head-gating, high-norm
+reference-token suppression, late-timestep gating, and an
+identity-supervised training loss -- each with a matched control, every
+one trades identity away for coherence instead of removing the defect.
+This is what a distributed, composition-entangled representation
+predicts, and it is the paper's spine.
+
+We learned to measure this honestly only after two reversals, themselves
+a contribution. A frequency-gated fix for the injection mechanism's
+copy-paste ``ghosting'' -- caused by the reference and target token grids
+sharing one RoPE coordinate origin -- raises raw identity-match on a
+development set (23\%$\to$40\%) but, under a defect-aware held-out judge,
+also raises composition-collapse from 20\% to 82\%, dropping usable
+output from 53\% to 15\%; identity-match alone would have shipped the
+worse recipe. And a pre-registered band ablation's apparent 8.6$\times$
+defect-rate gradient, CI-decisive on one set, failed our own audit -- no
+cross-set replication, and a confound-free re-run of its reference arm
+erases it. Identity-match-only, single-set evaluation is systematically
+optimistic for this class of method.
 
 \paragraph{Contributions.}
-\textbf{(1) A mechanistic fix and its honest limit.} A mechanistic
-explanation, from the transformer's own RoPE coordinate construction, of
-why naive position-preserving key/value injection produces copy-paste
-ghosting, and a frequency-gated re-application of RoPE that removes it --
-together with held-out evidence that the fix,
-as currently tuned, trades ghosting for a worse composition-collapse
-failure mode, so we recommend the simpler position-free baseline for
-deployment rather than the mechanism this project set out to promote.
-\textbf{(2) A training-light alternative, characterized by a
-pre-registered null result.} A 0.06\%-parameter band-LoRA competitive
-with a purpose-trained 12.9B adapter baseline on identity-match and
-usable-output rate, whose designed keystone ablation (does layer
-position determine identity capacity?) returns a null that replicates
-across two held-out subject sets -- and whose one apparent positive
-side-finding we refuted ourselves, by cross-set replication and a
-confound-free re-run, and report as an audited artifact.
-\textbf{(3) A cross-mechanism evaluation finding.} Across two
-independent mechanisms, the decisive practical differences lived on
-axes standard evaluation ignores: a composition-defect axis invisible
-to identity-match scoring (training-free line), and a
-subject-set/generation-protocol sensitivity that manufactured a
-CI-decisive but spurious ablation effect (training-light line). Future
-reference-conditioning work should report a joint identity-and-defect
-metric, replicate across subject sets, and hold generation protocol
-fixed across ablation arms.
-\textbf{(4) A held-out validation protocol} that catches exactly the
-failures it was built to catch, on probe sets disjoint from every
-development set used to tune either mechanism -- including refuting
-this paper's own strongest intermediate finding.
+\textbf{(1) Cheap activation with a reference-driven control.} A frozen
+pure-T2I DiT becomes a one-shot identity conditioner two mechanistically
+independent, low-cost ways -- inference-time attention key/value
+injection (zero training) and a 0.06\%-parameter band-LoRA -- each
+reaching identity parity with a same-class trained adapter; a
+shuffled-reference control confirms the conditioning is genuinely
+reference-driven rather than a prompt-only floor, and exposes that a
+stronger baseline's identity number is itself partly such a floor.
+\textbf{(2) An anatomy of the identity signal (the core claim).}
+One-shot identity in this frozen DiT behaves as a \emph{distributed,
+composition-entangled} attention code: identity-match is flat across
+layer bands (cross-set-replicated, and concurring across the injection
+and the trained mechanism), across reference-affinity head subsets, and
+across denoising-timestep gates -- a locality we do not find, in contrast
+to layer-locality assumptions in prior injection work
+\citep{zhang2025freecus} and head-specialization assumptions in
+attention-routing methods (whose priors, we note, may simply not transfer
+to this frozen-T2I anime setting rather than being refuted by it). We
+give a RoPE-coordinate mechanism for the ghosting failure and show the
+collage defect and identity co-form early in denoising; the resulting
+prediction -- that no localized repair separates them -- is borne out by
+five matched-control repairs that all trade identity for coherence.
+\textbf{(3) A diagnostic and an evaluation protocol.} A
+peaked-versus-diffuse attention-selectivity signature, observed across
+two architectures and offered as a diagnostic rather than a law,
+separates a model that transfers structured identity from one that
+transfers only mean color; and a paired identity-and-defect, cross-set
+held-out protocol -- motivated by two measurement reversals that
+identity-only, single-set scoring would have shipped -- that catches
+recipe- and protocol-level optimism such scoring misses.

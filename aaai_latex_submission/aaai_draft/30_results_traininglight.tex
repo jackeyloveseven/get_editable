@@ -71,3 +71,41 @@ correspond to real damage depending on severity threshold (zero false
 negatives on controls) -- raw judge rates overstate severe-defect
 rates. What survives is the null: layer position determines neither
 identity capacity nor, as far as our evidence goes, defect rate.
+
+\subsection{Does an identity-supervised objective separate the
+defect?}\label{sec:auxloss}
+
+If the collage defect were a training deficiency rather than a
+structural entanglement, adding an explicit identity signal to the
+objective should buy identity without the defect. We test this directly.
+From a config-matched MSE-only baseline (band 10--25, $r{=}8$, mix3
+manifest, seed 0, 1500 steps), two arms add one auxiliary loss and
+nothing else: a decode-space CCIP identity loss (weight 0.05) and a
+perceptual loss (weight 0.1). Evaluated on the full held-out
+30-subject set $\times$ 2 seeds ($n{=}60$/arm) with the same
+defect-aware judge, neither helps (Table~\ref{tab:auxloss}): both leave
+clean-yes at or below the MSE baseline while \emph{raising} the defect
+rate -- the identity-loss arm to 26.7\% and the perceptual arm to
+40.7\%, against the baseline's 13.3\%. The most direct training-side
+repair moves the tradeoff the wrong way rather than dissolving it. This
+is the fifth matched-control repair, and the only training-side one, to
+trade identity for coherence rather than separate them -- consistent
+with a defect entangled with identity, not one caused by weak
+supervision.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Arm ($n{=}60$) & clean-yes & defect \\
+\midrule
+MSE baseline & \textbf{16.7\% [9,28]} & \textbf{13.3\% [7,24]} \\
++ CCIP identity loss & 15.0\% [8,26] & 26.7\% [17,39] \\
++ perceptual loss & 10.2\% [5,20] & 40.7\% [29,53] \\
+\bottomrule
+\end{tabular}
+\caption{Auxiliary-loss pilot, held-out $n{=}60$/arm, Wilson 95\% CI. An
+explicit identity (CCIP) or perceptual objective does not reduce the
+composition defect; both raise it without improving identity match.}
+\label{tab:auxloss}
+\end{table}

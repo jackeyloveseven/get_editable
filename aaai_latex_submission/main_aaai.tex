@@ -25,7 +25,7 @@
 
 \setcounter{secnumdepth}{0} % AAAI: unnumbered sections by default
 
-\title{Identity-Match Is Not Enough: Composition-Collapse Blind Spots in Two Cheap Reference-Conditioning Mechanisms for a Frozen Anime Diffusion Transformer}
+\title{One-Shot Subject Identity Is a Distributed, Composition-Entangled Code in a Frozen Text-to-Image Transformer}
 \author{
     Anonymous Submission
 }
@@ -39,34 +39,32 @@
 
 \begin{abstract}
 Reference-conditioned identity preservation is normally bought with a
-purpose-trained adapter on real-face data or a base model already
-pretrained for editing; neither transfers to a frozen, pure
-text-to-image (T2I) anime diffusion transformer that must remain
-unmodified. We activate such a model with two cheap, independent
-mechanisms -- training-free attention key/value injection from a
-reference image, and a 0.06\%-parameter band-LoRA -- and show both are
-competitive with a same-class trained adapter at a fraction of the cost.
-The paper's central finding is methodological: identity-match rate, the
-field's standard headline metric, is not merely incomplete but actively
-misleading, in two mechanistically unrelated settings. First, a
-training-free recipe tuned on a small development set raises raw
-identity-match rate (23\%$\to$40\%) but also raises a severe
-composition-collapse (collage/tiling) defect rate from 20\% to 82\%,
-collapsing usable-output rate from 53\% to 15\% -- identity-match alone
-would have recommended the worse recipe. Second, a pre-registered
-ablation on the unrelated training-light mechanism, testing whether a
-specific transformer-layer band is responsible for identity capacity,
-finds identity-match statistically flat across all four tested layer
-bands -- a null that replicates on a second held-out subject set. An
-apparent 8.6$\times$ defect-rate gradient across the same bands,
-CI-decisive on the first set, did not survive our own audit: it fails
-to replicate cross-set, and a confound-free re-run of its reference arm
-(matched training manifest, no generation-style prefix) erases it on
-the original set, with subject-clustered CIs disjoint from the original
-value. We report the full audit trail -- the failed hypothesis and the
-self-refuted gradient -- as evidence that identity-match-only,
-single-set, single-protocol evaluation is a systematically optimistic
-basis for reference-conditioning claims.
+purpose-trained adapter or an edit-pretrained base; neither transfers to
+a frozen, pure text-to-image (T2I) anime diffusion transformer that must
+stay unmodified. We turn such a model into a one-shot identity
+conditioner two cheap ways -- training-free attention key/value injection
+from a reference image, and a 0.06\%-parameter band-LoRA -- each
+competitive with a same-class trained adapter (IP-Adapter) on identity
+match, with a shuffled-reference control confirming the effect is
+genuinely reference-driven, not a prompt-only floor. We then ask
+\emph{where} this identity signal lives, and find no localized handle to
+grab: identity match is statistically flat across four transformer layer
+bands (a null that cross-set replicates and holds for both the
+injection and the trained mechanism), across reference-affinity-selected
+head subsets (matched-count controls), and across denoising-time gates.
+Under this distributed, composition-entangled account the persistent
+tiled/``collage'' defect is predicted, not incidental: five targeted
+repairs -- background isolation, head-gating, outlier-token suppression,
+late-timestep gating, and an identity-supervised training loss -- each
+with a matched control, all trade identity for coherence rather than
+separating them. A second architecture reproduces the account only as a
+diagnostic: a peaked-versus-diffuse attention-selectivity signature
+separates a model that transfers structured identity from one that
+transfers only mean color. Throughout, we document a measurement hazard
+twice over -- identity-match-only evaluation is systematically
+optimistic, recommending recipes that a joint identity-and-defect metric
+rejects (usable output 53\%$\to$15\% in one mechanism; a CI-decisive
+8.6$\times$ ``defect gradient'' our own audit refutes in the other).
 \end{abstract}
 
 \input{aaai_draft/00_intro}
@@ -77,7 +75,7 @@ basis for reference-conditioning claims.
 
 \begin{figure*}[t]
   \centering
-  \includegraphics[width=0.85\textwidth]{figs/mechanism_diagram_kv_injection.png}
+  \includegraphics[width=0.66\textwidth]{figs/mechanism_diagram_kv_injection.png}
   \caption{The ref-KV injection mechanism (Method). (a)
   Capture pass: reference K/V stored from a layer band. (b) Naive
   same-origin injection ghosts; the fix re-centers RoPE and keeps only
@@ -91,7 +89,7 @@ basis for reference-conditioning claims.
 
 \begin{figure*}[t]
   \centering
-  \includegraphics[width=0.85\textwidth]{figs/holdout_reversal_defect_qualcheck.png}
+  \includegraphics[width=0.66\textwidth]{figs/holdout_reversal_defect_qualcheck.png}
   \caption{Held-out reversal: three subjects,
   \texttt{strip} (old) vs.\ \texttt{lowfreq} (new), same subject/seed. All
   three show \texttt{same\_character=yes} for the new recipe, but a
@@ -102,7 +100,7 @@ basis for reference-conditioning claims.
 
 \begin{figure*}[t]
   \centering
-  \includegraphics[width=0.85\textwidth]{figs/baseline_comparison_qualcheck.png}
+  \includegraphics[width=0.66\textwidth]{figs/baseline_comparison_qualcheck.png}
   \caption{Baseline comparison: top (u7122),
   identity matches in all four arms but only \texttt{strip}/krea2 are
   defect-free -- \texttt{lowfreq} collages, IP-Adapter garbles the hand.
@@ -114,16 +112,6 @@ basis for reference-conditioning claims.
 \end{figure*}
 
 \input{aaai_draft/30_results_traininglight}
-
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=0.56\textwidth]{figs/band_ablation_defect_qualcheck.png}
-  \caption{Band-position qualitative check: mid 10--25 vs.\ full-depth
-  0--29, same subject/seed. All three
-  full-depth cells are judge-flagged defective; inspection confirms
-  genuine anatomical breaks absent in the matched mid-band generation.}
-  \label{fig:bandablation}
-\end{figure*}
 
 \input{aaai_draft/40_limits_conclusion}
 

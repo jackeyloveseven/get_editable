@@ -126,3 +126,32 @@ mis-rendering them -- not one mode at three severities. \texttt{lowfreq}
 remains decisively worst on both strict metrics despite the highest raw
 identity-match rate, reinforcing that
 identity-match alone does not reliably rank these methods.
+
+\subsection{No localized handle for the defect}\label{sec:repairs}
+
+If the identity signal were localized, the collage defect should have a
+local handle -- a layer, a head, a token, or a denoising phase -- that
+suppresses it while sparing identity. We probed four such handles on the
+injection mechanism, each against a matched control, and the training
+objective of Sec.~\ref{sec:auxloss} is a fifth; none separates the defect
+from identity. \emph{(i) Background isolation.} Matting the reference to
+a white background (the content-leakage hypothesis) leaves the
+composition defect essentially unchanged (combined collage/other rate
+$88\%\to80\%$; the residual is a top-left positional artifact class, not
+per-reference leakage). \emph{(ii) Head-gating.} Restricting injection to
+the top-quarter attention heads by reference affinity does not beat a
+random-quarter or bottom-quarter control ($n{=}12$), and the
+top-affinity selection is in fact weakest on identity, so the apparent
+``fewer heads, cleaner'' effect is injection \emph{count}, not head
+selection. \emph{(iii) Outlier-token suppression.} Zeroing high-norm
+reference tokens is indistinguishable from a same-count random-drop
+control. \emph{(iv) Late-timestep gating.} Withholding injection until
+the low-noise phase removes the collage cleanly, but identity collapses
+with it (0/5 subjects retain reference-specific identity), because
+identity and composition co-form in the early denoising pass. Each
+result is individually modest, some at small $n$, but they agree in
+direction across four independent injection-side handles plus the
+training objective -- the outcome a distributed, composition-entangled
+identity predicts and a localized one does not. We do not claim no handle
+\emph{can} exist; we report that none of the natural layer-, head-,
+token-, timestep-, or objective-level handles we tested works.
