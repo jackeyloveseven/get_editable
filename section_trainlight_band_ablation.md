@@ -10,7 +10,9 @@
 > defect-gradient numbers without the addendum's context. The AAAI
 > submission text (`aaai_draft/30_results_traininglight.tex`,
 > `40_limits_conclusion.tex`, abstract, intro) was rewritten 2026-07-16 to
-> the audited state.
+> the audited state, then updated again 2026-07-17 for the closed 2x2
+> confound factorial and the step6000 operating-point upgrade (addendum
+> points 5-6 below).
 
 *Status: originally the keystone result for the Wave-3 (training-light)
 line, completed 2026-07-15; merged into the two-mechanism AAAI-27
@@ -217,13 +219,39 @@ number before touching fresh data) and `probe/65`.
    missed. Raw judge flag rates overstate severe-defect rates by
    ~1/3–2/3 per arm; judge failure modes documented (identity complaints
    absorbed into `visible_defect`, one outright hallucination).
+5. **Confound now closed, not bounded (2026-07-17).** The checkpoint
+   (`run_mix1`/`run_mix2`) × prompt-prefix (yes/raw) factorial that point 2
+   above flagged as needing two more cells is complete
+   (`data/cells3_summary.json`, rep30, n=60/cell, defect
+   per-image/clustered [CI]): published `m1`+prefix 3.3%/6.7% [0,17],
+   `m1`+raw 16.7%/30.0% [13,47], `m2`+prefix 30.0%/56.7% [40,73], `m2`+raw
+   (=cleanmid) 30.0%/53.3% [37,70]. The prefix effect turns out to be
+   checkpoint-specific: +13.3pp within `run_mix1` but exactly 0pp within
+   `run_mix2` — an interaction, not the portable ~10pp correction point 2
+   estimated. The only clustered-CI-disjoint marginal in the whole
+   factorial is the checkpoint swap at prefix-on (+26.7pp); the same swap
+   at prefix-off (+13.3pp) has overlapping CIs and stays inseparable from
+   run-to-run training variance. clean-yes is flat across all four cells
+   (16.7–21.7%), matching the null reported above.
+6. **step6000 upgrades the flagship operating point (2026-07-17).** A
+   clean-protocol run (`run_mix1`/`step_6000`, matched manifest, no
+   prefix) on holdout30
+   (`gemini_judge_m1s6k_ho30_band_10-25_r8_step6000.json`; step6000
+   pre-registered as the identity-max checkpoint,
+   `docs/design/2026-07-11_traininglight_design.md` §11.1) scores
+   clean-yes 41.7% [30,54] — disjoint from the same-protocol step4000's
+   18.3% [11,30] — defect 13.3% [7,24], clean-usable 76.7% [65,86].
+   Against krea2 (33.3% [23,46] / 1.7% [0,9] / 58.3% [46,70]) every
+   metric's CI still overlaps: tie, point-ahead, not a win. step4000
+   remains reported alongside for transparency.
 
 **Net result.** Under a uniform protocol every arm sits in an 8–30%
 defect band with no stable position ordering; full-depth is numerically
 worst on both sets but never CI-separated from mid. The claims that
 survive: (a) clean-yes identity is depth-uniform — replicated across two
 held-out sets, two protocols, and all five arm-measurements; (b) the
-band-LoRA remains statistically tied with krea2 on usable-output under a
-protocol-matched re-run (51.7–53.3% vs 58%). The defect gradient, and the
-"band 10-25 minimizes collateral damage" interpretation built on it, are
-withdrawn.
+band-LoRA remains statistically tied with krea2 on usable-output, now at
+a clean-protocol step6000 operating point (76.7% [65,86] vs 58.3%
+[46,70], tie point-ahead — step4000 scores 53.3% [41,65] under the same
+protocol). The defect gradient, and the "band 10-25 minimizes collateral
+damage" interpretation built on it, are withdrawn.

@@ -24,11 +24,13 @@ cross-set replication, confound-free re-run) is reported in the results
 section; each step independently weakened the gradient before the
 ensemble refuted it, and the first warning was visible early -- GPT-5.5
 had already failed to reproduce the gradient's magnitude. Attribution
-of the confounded mid arm's advantage is bounded, not exact: the
-generation prefix accounts for ${\sim}10$pp (same-pixel re-judge), the
-manifest/checkpoint difference is statistically inseparable from
-run-to-run training variance, and a residual remains that two unrun
-protocol cells would be needed to settle. Absolute numbers are modest
+of the confounded mid arm's advantage is now closed, not bounded: the
+completed checkpoint$\times$prompt-prefix factorial shows the prefix
+effect is checkpoint-specific, not portable ($+13.3$pp within
+run\_mix1, $+0$pp within run\_mix2), and the only clustered-CI-disjoint
+marginal (checkpoint at prefix-on, $+26.7$pp) still overlaps at
+prefix-off -- inseparable there from ordinary run-to-run training
+variance. Absolute numbers are modest
 regardless of arm: 51.7--55.0\% clean-usable / ${\sim}20$\% clean-yes
 is not state-of-the-art accuracy in either line of this work; the
 contribution is the evaluation methodology and the honest ablation
@@ -53,8 +55,9 @@ confound-free re-run. Neither mechanism beats a same-class
 baseline on any metric -- \texttt{strip} is statistically tied with
 IP-Adapter on strict identity accuracy at zero training cost, and the
 band-LoRA remains statistically tied with krea2-identity-edit's
-usable-output rate under a protocol-matched re-run (51.7--53.3\% vs.\
-58\%, overlapping CIs) at 0.06\% of its parameter count -- and we
+usable-output rate at a clean-protocol step6000 operating point
+(76.7\% [65,86] vs.\ 58.3\% [46,70]; step4000 scores 53.3\% [41,65]
+under the same protocol) at 0.06\% of its parameter count -- and we
 report both ties as ties, not wins. What remains open: the
 composition-collapse mode is mechanistically narrowed
 (position-encoding precision ruled out) but unfixed;

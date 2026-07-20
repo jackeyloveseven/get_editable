@@ -94,16 +94,34 @@ replication of its size, and we say so rather than claim more.
    as "the identity band" only if its identity-match confidence interval
    doesn't overlap the other tested bands'. Result, reported regardless of
    direction: it does not hold (all four tested bands' identity-match CIs
-   overlap, including under subject-level bootstrap clustering) — but an
-   unplanned, statistically distinct finding survives clustering: the same
-   band is uniquely low on training-induced rendering-defect rate. Layer
-   position governs how much collateral rendering damage LoRA training
-   does, not how much identity-conditioning capacity it learns — a
-   different and more specific claim than the one the ablation was
-   designed to test.
-6. **Cross-judge check.** Re-judge the mid-vs-full-depth pairs with a
-   second model family (GPT-5.5, not Gemini), same prompt, disjoint from
-   the judge used to produce every other number in this work. Report the
-   result as-is: direction replicates, magnitude and CI width do not —
-   a real independence check, not a rhetorical one, and its limits are
-   part of the reported result rather than omitted.
+   overlap, including under subject-level bootstrap clustering) — a null
+   that later replicated on a second, disjoint held-out subject set with
+   zero retraining. Identity-conditioning capacity is depth-uniform; layer
+   position is not the identity band the ablation was designed to find.
+6. **The audit chain that refuted the apparent defect-rate gradient, run
+   in order.** The same ablation's secondary metric (defect rate) first
+   looked CI-decisive on one dev set, then failed one check after another:
+   (a) *cross-judge* — re-judging the mid-vs-full-depth pairs with a
+   second model family (GPT-5.5, not Gemini), same prompt, replicates
+   direction but not magnitude, the first warning; (b) *seeded random
+   audit* — a pre-registered seed replaces the original cherry-picked
+   3-of-17 spot-check, finding only 30-70% of raw judge flags correspond
+   to real damage depending on severity threshold; (c) *cross-set
+   replication* — all four checkpoints, zero retraining, re-run on a
+   second disjoint held-out set: the interior ranking inverts and the
+   mid-vs-full-depth clustered CIs overlap, so the gradient does not
+   generalize; (d) *2x2 confound factorial* — the reused mid checkpoint
+   was double-confounded (training manifest/checkpoint and a
+   generation-style prompt prefix); the completed checkpoint x prefix
+   factorial (n=60/cell) shows the prefix effect is checkpoint-specific
+   (+13.3pp within run\_mix1, +0pp within run\_mix2) rather than a
+   portable correction, and the only clustered-CI-disjoint marginal is
+   the checkpoint swap at prefix-on; (e) *step6000 clean-protocol
+   operating point* — closing the factorial motivated re-checking the
+   production checkpoint choice itself: a confound-free run at the
+   pre-registered identity-max checkpoint (step6000) on held-out data
+   scores clean-yes 41.7%, disjoint from step4000's 18.3% under the same
+   protocol, and moves the krea2 comparison to a tie, point-ahead on
+   usable-output (76.7% vs. 58.3%, overlapping CIs) rather than a bare
+   statistical tie. Report each step as-is, including the ones that only
+   partially replicate — a real audit trail, not a rhetorical one.

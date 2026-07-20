@@ -514,6 +514,133 @@ remains decisively the worst arm on both strict metrics. No single arm
 dominates across every column, and `strip`'s and krea2's failures are
 complementary rather than one strictly subsuming the other.
 
+### 4.5 Two additional ablations (2026-07-19)
+
+**Is the composition defect reference *content leakage*? (negative.)** A natural
+hypothesis, motivated by the diptych subject-driven literature (Diptych
+Prompting, arXiv:2411.15466, which names "content leakage" — a reference's
+*background, pose, and location* being mirrored into the output), is that our
+picture-in-picture / collage defects arise because the reference image is
+injected *with its background*, and that isolating the subject before injection
+would remove them. We tested this directly and cheaply: reference images were
+matted with an off-the-shelf anime segmenter (`imgutils` isnet-anime, subject
+composited on white), and the frozen training-free recipe was re-run on the same
+30 held-out subjects × 2 seeds, paired original-vs-matted, with defects
+stratified by subtype (picture-in-picture/collage as the primary metric, since
+limb-geometry defects are not leakage and would only dilute the signal) and
+`same_character` read as a second axis. Head-line counts appear to move
+(`strip` pip-collage 26/60→17/60; `lowfreq` 52/60→47/60) with identity
+unchanged (`same_character`=yes 27%→28% and 43%→45%). **But this is largely a
+judge re-classification, not a real fix**: manual inspection of the "repaired"
+cases shows the same position-fixed top-left corner artifacts persist after
+matting and are merely re-labeled from `pip_collage` to `other` (the combined
+`pip_collage`+`other` leakage proxy moves only 88%→80% on `strip`), and the
+subjects whose *reference* carries a large background do **not** reproduce that
+background as a block in either condition. We conclude the dominant defect on
+the production line is a position-fixed rendering artifact (partly a reference-
+watermark echo, partly a model tic), **not** reference-background leakage, and
+that input-side subject isolation does not close the defect gap. This is the
+fourth independent negative on defect mitigation (after RoPE offset, inference-
+time seed selection, and decode-space auxiliary losses), and together they
+sharpen the limitation in Section 5: the gap is a rendering/architectural
+property of the frozen base, not something removable by conditioning-side
+preprocessing. (A more aggressive reference-watermark/text removal is a distinct,
+untested lever and is left to future work.)
+
+**Shuffled-reference attribution of the identity tie.** To test whether the
+identity parity with krea2 (Section 4.4) is genuinely reference-driven on both
+sides, we ran krea2's own shuffled-reference floor (each subject fed a *different*
+subject's reference via a fixed derangement, with its own prompt; judged against
+the subject's true reference). krea2's `same_character`=yes falls only modestly,
+35%→22% (with 23/60 partials), whereas our band-LoRA line collapses from 38% to
+5% under the same manipulation. The reference-attributable identity gain is thus
+~33pp for our method versus ~13pp for krea2: although the two are tied on raw
+clean-yes, krea2's match is substantially carried by prompt attributes (it uses
+grounded instruction encoding) rather than the reference, while ours is the more
+faithfully *reference*-conditioned. The shuffled-reference ablation therefore
+cuts both ways — it both confirms our own conditioning performs real identity
+injection and reveals that a matched baseline's identity number is partly a
+prompt-only floor. (n=60, single judge; the 38→5 figure is the band-LoRA line,
+consistent with the 38% vs 33% clean-yes tie of Section 4.4 — not the
+training-free `strip` line, whose clean-yes is 13%.)
+
+### 4.6 What the composition defect is *not*: three controlled negatives
+
+Because the composition defect (collage / picture-in-picture / fixed-corner
+artifacts) is the one axis on which we clearly trail the purpose-trained
+baseline, we tested three hypotheses for its cause, each as a *matched-control*
+qualitative probe (paired same-subject/seed generations, inspected directly).
+All three came back negative, and together they localize what the defect is not:
+
+1. **Not reference-background content leakage.** Isolating the reference subject
+   from its background before injection (§4.5) did not remove the artifacts;
+   the apparent picture-in-picture reduction was judge re-classification of
+   *persistent* fixed-corner artifacts, and references carrying large
+   backgrounds did not reproduce them as blocks in either condition.
+2. **Not a localized set of "identity heads."** Restricting ref-KV injection to
+   the top-*k* attention heads by reference affinity *did* reduce collage while
+   preserving (coarse) identity — but the matched-count control is decisive:
+   injecting a *random* set of *k* heads, or the *bottom*-*k*, was
+   indistinguishable from the top-*k*. The improvement is the *count* (fewer
+   injected heads = weaker aggregate injection, i.e. the known injection-strength
+   knob), not a *selection* of identity-bearing heads. There is no evidence for
+   sparse head-level localization of identity in this model.
+3. **Not a few high-norm outlier reference tokens.** Zeroing the values of the
+   highest-norm reference tokens (candidate attention-sink / watermark tokens)
+   before injection was indistinguishable from the unmodified baseline — the
+   corner artifacts were untouched — and no better than dropping the same number
+   of *random* reference tokens.
+
+Each probe carried a matched control (background-removed vs. original;
+top-*k* vs. random-*k*/bottom-*k*; outlier-norm vs. random-drop), and in every
+case the control eliminated the candidate explanation. We therefore treat the
+composition defect as a rendering property of the frozen base under
+attention-level reference injection, not something removable by conditioning-
+or injection-side preprocessing — which is why it appears as a limitation
+(§5) rather than a solved problem. These are qualitative matched-control probes,
+not a quantified benchmark; we report them as negative evidence that narrows the
+space of causes, not as a positive method contribution.
+
+### 4.7 Cross-model behavior: the mechanism is architecture-specific
+
+To test whether the training-free content-addressed injection is a general
+property of single-stream T2I DiTs, we ported it — the same processor-swap
+capture/inject scheme, faithfully replicating the target attention (qk-norm,
+RoPE, GQA, SDPA) — to a second frozen model, Lumina-Image-2.0 (24 heads,
+26 layers). It does **not** transfer: injecting the position-free reference
+keys either collapses the image (full-band) or, at the one configuration that
+looks reference-like, degrades to a position-locked copy-paste of the reference
+that ignores the target prompt — not identity conditioning.
+
+Instrumenting the attention isolates a clean **dissociation**, and rules out the
+obvious explanations. Target queries attend to the injected position-free keys
+in *both* models at comparable mass (Z-Image ~0.07, Lumina ~0.04–0.09), and the
+injected-key norms match the context keys in both — so the failure is **not**
+that Lumina ignores the reference. The difference is *selectivity*: on Z-Image
+the per-query reference attention is **peaked** (normalized entropy ~0.62,
+peak ~0.15) and transfers *structured* identity (hair, eye colour, and a
+distinctive pendant all reproduced); on Lumina it is **diffuse** (entropy ~0.81,
+peak ~0.04) and transfers only a mean-colour bleed (the model's own face with a
+faint reference-hue tint). Lumina's *values* do carry the identity — a
+position-bound (RoPE) injection copies it in, proving the information is present
+and readable — but only under exact-position binding, not content addressing.
+Forcing Lumina to attend more (a uniform pre-softmax bias on the reference
+columns) does not recover structured identity; the colour-bleed simply
+saturates at the reference's mean colour.
+
+We attempted to isolate the architectural cause with a within-Z-Image causal
+sweep (rotating the injected keys with progressively higher RoPE θ, 256→10000,
+Lumina's value) to avoid the two-model confound. Selectivity degraded only
+partially with θ and identity was **preserved at every θ** — so RoPE phase
+geometry is *not* the determinant. With attention mass, key norm, and θ each
+ruled out, the cause remains confounded across the models' other differences
+(grouped-query attention, depth, text encoder) and we do not claim to have
+isolated it. The honest contribution here is descriptive: content-addressed
+training-free identity injection is **architecture-specific**, and a simple
+attention-selectivity signature (peaked vs. diffuse) separates a model that can
+be activated this way from one that cannot — a diagnostic, not a universal
+recipe.
+
 ## 5. Limitations
 
 - **The frequency-gated wide-band recipe (`lowfreq`, band 10-25) is not
@@ -712,7 +839,15 @@ the defect it causes are not separable through that channel. Both
 geometric attributes and a working fix for the wide-band defect mode are
 concrete, well-scoped next steps for future work on a fresh,
 uncontaminated probe set, not incremental tuning of the sets already used
-to produce the numbers in this draft.
+to produce the numbers in this draft. Toward that fix we tested three
+hypotheses for the composition defect's cause this round — reference-
+background content leakage, a sparse set of identity-bearing attention heads,
+and a few high-norm outlier reference tokens — each with a matched control,
+and all three came back negative (Section 4.6). That result is itself
+informative: it narrows the space of plausible causes and reinforces our
+reading of the defect as a rendering property of the frozen base under
+attention-level injection, rather than an artifact removable by
+conditioning- or injection-side preprocessing.
 
 ## References
 

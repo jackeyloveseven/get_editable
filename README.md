@@ -73,7 +73,12 @@ band-LoRA stays statistically tied with krea2 on usable-output under a
 protocol-matched re-run. All submission surfaces (abstract, intro,
 results, limitations, conclusion) were rewritten 2026-07-16 to present
 the gradient as a refuted, fully-audited artifact — the audit trail is
-the contribution.
+the contribution. A 2026-07-17 follow-up closed the remaining
+attribution gap with a completed checkpoint × prompt-prefix 2x2
+factorial (`data/cells3_summary.json`) and moved the paper's flagship
+krea2 comparison to a confound-free step6000 operating point (clean-yes
+41.7% vs. krea2's 33.3%, usable-output 76.7% vs. 58.3% — tie,
+point-ahead, not a win).
 
 **lowfreq's 82% defect collapse: mechanism decomposition (2026-07-16).**
 `draft_v0.md` originally called this "unexplained." A single-variable
