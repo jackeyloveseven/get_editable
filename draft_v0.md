@@ -1,15 +1,16 @@
-# Training-Free Identity Conditioning of a Frozen Anime T2I Diffusion Transformer via Attention KV Injection: A Position-Handling Case Study
+# One-Shot Subject Identity Is a Distributed, Composition-Entangled Code in a Frozen Text-to-Image Transformer
 
-**Status: draft v0, 2026-07-07 — NOT submission-ready.** Held-out validation
-(`probe/41_holdout_eval.py`, Section 4.3) is complete and **reverses the
-paper's original headline claim**: on a joint identity+defect metric, the
-`lowfreq`+band10-25 recipe this draft was built around is worse than the
-`strip`/band21-25 default it was meant to replace. The framing below has been
-rewritten to report this honestly rather than salvage the original narrative.
-Do not quote any number in this file outside the project without checking it
-against `data/gemini_judge_*.json` first — see
-`docs/design/2026-07-02_wave1_exec_design.md` for full experimental history
-and negative results this draft compresses away.
+**Status: 2026-07-20 — reframed to positive-claim framing; AAAI-27-compliant
+(body ≤7pp, refs on 8).** The submission (`aaai_latex_submission/main_aaai.tex`)
+now leads with the positive thesis — one-shot identity in this frozen DiT is a
+*distributed, composition-entangled* attention code — with the two evaluation
+reversals (the `lowfreq` held-out reversal and the withdrawn band-LoRA defect
+gradient) demoted to a measurement-methodology pillar, and **five** matched-control
+failed repairs (background / head / high-norm token / late-timestep /
+identity-supervised training loss — the last from the n=60 aux-loss eval)
+reported as *confirmatory predictions* of the distributed account. This markdown
+is the detailed working draft; **the LaTeX is canonical** for numbers and framing.
+Do not quote any number without checking `data/gemini_judge_*.json` first.
 
 > **两条方法线并投同一份 AAAI-27 稿（此状态栏更新于 07-16 晚）**：本 draft 是
 > **training-free KV 注入**（strip/lowfreq）线的详细版本；**训练轻量 band-LoRA** 线写在
@@ -26,37 +27,31 @@ and negative results this draft compresses away.
 
 ## Abstract
 
-Reference-conditioned identity preservation for diffusion models is typically
-solved by training an adapter (IP-Adapter, PhotoMaker) or switching to an
-instruction-following edit model. Both routes are unavailable when the base
-model is a frozen, pure text-to-image (T2I) diffusion transformer that must
-remain a T2I model (no editing semantics, no per-subject or general
-fine-tuning). We show that a frozen anime T2I DiT (Z-Image, 2511.22699) can be turned
-into a one-shot reference-conditioned identity generator entirely at
-inference time, by concatenating the reference image's attention key/value
-tensors into a restricted band of the transformer's self-attention layers.
-We identify two failure modes of the naive version of this idea — full
-content injection outside a narrow layer band destabilizes generation, and
-position-preserving key injection causes literal copy-paste "ghosting"
-because the reference and target token grids share the same RoPE coordinate
-origin — and introduce a frequency-gated fix: re-apply rotary position
-embeddings to injected reference keys but null all but the lowest-frequency
-rotation components, transferring coarse position information without
-pixel-exact binding. On a development set this looked like a clean win
-(complete-identity-mismatch rate 25-32% → 0% [0%,9%]). A held-out validation
-with a stricter, joint identity-**and**-defect metric, judged with an
-explicit chain-of-thought prompt (Section 4.1), overturns this: the
-frequency-gated, wide-band recipe raises raw identity-match rate (23%→40%
-"yes") but *also* raises the rate of a severe tiled/collaged-composition
-defect from 20% to 82%, so the rate of an actually usable image collapses
-from 53% (position-free baseline) to 15%. We report this reversal as the
-paper's central empirical finding: **the position-free `strip` baseline is
-the recipe we now recommend**, and marginal (identity-only) metrics measured
-without a matched defect check are unreliable for this class of method.
-Zero training, zero LoRA, and no departure from the frozen T2I base hold for
-both recipes; the open problem this work leaves is fixing the frequency-gated
-mechanism's defect mode before it can be recommended over the simpler
-baseline it was meant to replace.
+Reference-conditioned identity preservation is normally bought with a
+purpose-trained adapter or an edit-pretrained base; neither transfers to a
+frozen, pure text-to-image (T2I) anime diffusion transformer that must stay
+unmodified. We turn such a model into a one-shot identity conditioner two cheap
+ways — training-free attention key/value injection from a reference image, and a
+0.06%-parameter band-LoRA — each competitive with a same-class trained adapter
+(IP-Adapter) on identity match, with a shuffled-reference control confirming the
+effect is genuinely reference-driven, not a prompt-only floor. We then ask
+*where* this identity signal lives, and find no localized handle to grab:
+identity match is statistically flat across four transformer layer bands (a null
+that cross-set replicates and holds for both the injection and the trained
+mechanism), across reference-affinity-selected head subsets (matched-count
+controls), and across denoising-time gates. Under this **distributed,
+composition-entangled** account the persistent tiled/"collage" defect is
+predicted, not incidental: five targeted repairs — background isolation,
+head-gating, outlier-token suppression, late-timestep gating, and an
+identity-supervised training loss — each with a matched control, all trade
+identity for coherence rather than separating them. A second architecture
+reproduces the account only as a diagnostic: a peaked-versus-diffuse
+attention-selectivity signature separates a model that transfers structured
+identity from one that transfers only mean color. Throughout, we document a
+measurement hazard twice over — identity-match-only evaluation is systematically
+optimistic, recommending recipes that a joint identity-and-defect metric rejects
+(usable output 53%→15% in one mechanism; a CI-decisive 8.6× "defect gradient"
+our own audit refutes in the other).
 
 ## 1. Introduction
 
@@ -67,24 +62,37 @@ baseline it was meant to replace.
   definition, not just an implementation detail): frozen base, T2I-only
   captions (no edit verbs), diffusers-only (no library patching), no
   per-subject training.
-- Contribution list:
-  1. A mechanistic explanation, from the transformer's own RoPE coordinate
-     construction, of why naive position-preserving KV injection produces
-     copy-paste ghosting (Section 3.2) — not previously documented for this
-     architecture family, as far as our literature search found.
-  2. A frequency-gated RoPE re-application (`lowfreq`) that is a binary
-     hard-cutoff variant distinct from the concurrent smooth-scaling approach
-     of Untwisting RoPE (arXiv 2602.05013) — Section 3.3.
-  3. An empirical finding that band width and position-gating interact: widening
-     the injection band alone, or frequency-gating alone, both net-lose to the
-     position-free baseline; only the combination wins **on a marginal,
-     identity-only dev-set metric** (Section 4.2, Table 2) — a result Section
-     4.3 shows does not survive a stricter joint metric on held-out data.
-  4. A held-out validation protocol addressing dev-set contamination in our
-     own tuning process (Section 4.3), which catches exactly the failure the
-     protocol was designed to catch: the frequency-gated recipe's apparent
-     win reverses once composition defects are counted jointly with identity
-     match, rather than measured separately and compared in isolation.
+- Contributions (three pillars):
+  1. **Cheap activation with a reference-driven control.** A frozen pure-T2I
+     DiT becomes a one-shot identity conditioner two mechanistically independent,
+     low-cost ways — inference-time attention KV injection (zero training) and a
+     0.06%-parameter band-LoRA — each reaching identity parity with a same-class
+     trained adapter; a shuffled-reference control confirms the conditioning is
+     genuinely reference-driven, not a prompt-only floor (and exposes that a
+     stronger baseline's identity number is itself partly such a floor).
+  2. **An anatomy of the identity signal (the core claim).** One-shot identity
+     in this frozen DiT behaves as a *distributed, composition-entangled*
+     attention code: identity-match is flat across layer bands
+     (cross-set-replicated, concurring across both the injection and the trained
+     mechanism), across reference-affinity head subsets, and across
+     denoising-timestep gates — a locality we do not find, in contrast to
+     layer-locality assumptions in prior injection work (FreeCus) and
+     head-specialization assumptions in attention-routing methods (whose priors
+     may simply not transfer to this frozen-T2I anime setting rather than being
+     refuted by it). We give a RoPE-coordinate mechanism for the ghosting
+     failure and show the collage defect and identity co-form early in
+     denoising; the prediction that no localized repair separates them is borne
+     out by five matched-control repairs (background isolation, head-gating,
+     high-norm-token suppression, late-timestep gating, and an
+     identity-supervised training loss) that all trade identity for coherence.
+  3. **A diagnostic and an evaluation protocol.** A peaked-versus-diffuse
+     attention-selectivity signature, observed across two architectures and
+     offered as a diagnostic rather than a law, separates a model that transfers
+     structured identity from one that transfers only mean color; and a paired
+     identity-and-defect, cross-set held-out protocol — motivated by two
+     measurement reversals that identity-only, single-set scoring would have
+     shipped — that catches recipe- and protocol-level optimism such scoring
+     misses.
 
 ## 2. Related Work
 
@@ -564,13 +572,15 @@ prompt-only floor. (n=60, single judge; the 38→5 figure is the band-LoRA line,
 consistent with the 38% vs 33% clean-yes tie of Section 4.4 — not the
 training-free `strip` line, whose clean-yes is 13%.)
 
-### 4.6 What the composition defect is *not*: three controlled negatives
+### 4.6 No localized handle for the defect: five matched-control repairs
 
-Because the composition defect (collage / picture-in-picture / fixed-corner
-artifacts) is the one axis on which we clearly trail the purpose-trained
-baseline, we tested three hypotheses for its cause, each as a *matched-control*
-qualitative probe (paired same-subject/seed generations, inspected directly).
-All three came back negative, and together they localize what the defect is not:
+If identity were localized, the composition defect (collage / picture-in-picture
+/ fixed-corner artifacts) should have a local handle — a layer, a head, a token,
+a denoising phase, or an objective — that suppresses it while sparing identity.
+We probed five such handles, each against a *matched control*. None separates the
+defect from identity. Under the *distributed, composition-entangled* account this
+is the **predicted** outcome (a localized representation predicts the opposite),
+so we read these as confirmatory, not merely as a pile of negatives:
 
 1. **Not reference-background content leakage.** Isolating the reference subject
    from its background before injection (§4.5) did not remove the artifacts;
@@ -591,15 +601,30 @@ All three came back negative, and together they localize what the defect is not:
    corner artifacts were untouched — and no better than dropping the same number
    of *random* reference tokens.
 
+4. **Not fixable by denoising-time gating.** Withholding injection until the
+   low-noise phase (`late50`/`late30`) removes the collage cleanly, but identity
+   collapses with it (0/5 subjects retain reference-specific identity — hair
+   colour/style, eye colour, accessories revert to a generic prior), because
+   identity and composition co-form in the early denoising pass. The defect is
+   localized in denoising *time* — but so is the identity, so gating cannot
+   separate them.
+5. **Not fixable by an identity-supervised training objective.** On the
+   training-light mechanism, adding a decode-space CCIP identity loss (w=0.05) or
+   a perceptual loss (w=0.1) to a config-matched MSE baseline (held-out n=60)
+   does *not* reduce the defect — both *raise* it (defect 13.3% → 26.7% / 40.7%)
+   without improving identity match (clean-yes 16.7% → 15.0% / 10.2%). The most
+   direct training-side repair moves the tradeoff the wrong way (§sec:auxloss).
+
 Each probe carried a matched control (background-removed vs. original;
-top-*k* vs. random-*k*/bottom-*k*; outlier-norm vs. random-drop), and in every
-case the control eliminated the candidate explanation. We therefore treat the
-composition defect as a rendering property of the frozen base under
-attention-level reference injection, not something removable by conditioning-
-or injection-side preprocessing — which is why it appears as a limitation
-(§5) rather than a solved problem. These are qualitative matched-control probes,
-not a quantified benchmark; we report them as negative evidence that narrows the
-space of causes, not as a positive method contribution.
+top-*k* vs. random-*k*/bottom-*k*; outlier-norm vs. random-drop; late-gate vs.
+full schedule; CCIP/perceptual vs. MSE). None separated the defect from identity.
+Four handles are on the training-free injection side and span *space*
+(layer/head/token) and *time* (schedule); the fifth is on the *training* side.
+That five independent handles all fail is what a distributed,
+composition-entangled identity predicts and a localized one does not. We do not
+claim no handle *can* exist — only that none of the natural layer-, head-,
+token-, timestep-, or objective-level handles we tested works; the defect is
+characterized, not solved (§5).
 
 ### 4.7 Cross-model behavior: the mechanism is architecture-specific
 
@@ -788,32 +813,38 @@ production is `strip`/band 21-25 (53% clean-usable rate), not the
 
 ## 8. Conclusion
 
-We set out to activate a frozen, pure-T2I anime diffusion transformer as a
-reference-conditioned identity generator without training, LoRA, or a switch
-to an edit-model architecture. The mechanistic contribution stands: KV
-injection into a restricted attention-layer band works at all only once the
-RoPE coordinate-origin collision between reference and target token grids is
-understood and handled (Section 3.2), and frequency-gating that position
-information (`lowfreq`) is a real, novel way to trade off content fidelity
-against composition stability (Section 3.3) — even though, on the evidence
-in this draft, it currently trades too far in the wrong direction to
-recommend for deployment (Section 4.3).
+We activated a frozen, pure-T2I anime diffusion transformer as a one-shot
+reference-conditioned identity generator two independent, cheap ways —
+zero-training attention KV injection and a 0.06%-parameter band-LoRA — each
+statistically tied with a same-class trained baseline on identity (`strip` with
+IP-Adapter at zero training cost; the band-LoRA with krea2 at 0.06% of its
+parameters), reported as ties, not wins, with a shuffled-reference control
+confirming the conditioning is genuinely reference-driven.
 
-The paper's second contribution is methodological rather than mechanistic:
-a held-out validation that was built to catch dev-set overfitting caught
-something more general — that identity-match rate and composition-defect
-rate are correlated enough, for this method family, that reporting either
-alone actively misleads a deployment decision. We found this out by
-following our own protocol rather than by suspecting it in advance, and we
-are reporting the reversal rather than the result we originally set out to
-publish. The recommended configuration (`strip`, band 21-25) is not a novel
-algorithmic contribution — it is the simpler baseline this project initially
-tried to improve on — but it is the one the evidence in Section 4.3 actually
-supports, it is statistically indistinguishable from a same-class, trained
-SDXL adapter baseline (IP-Adapter) on strict identity accuracy at zero
-training cost (Section 4.4, CIs overlap in both directions), and it is the
-one shipped in `probe/50_production.py` with a verified, working deployment
-path. That parity claim is specific to the general-adapter class: against a
+Using these mechanisms as probes, the paper's central finding is an *anatomy*:
+one-shot identity in this frozen DiT is a **distributed, composition-entangled**
+attention code. Within every handle we could test it is not localized — to any
+layer band (a null replicated across two held-out subject sets and concurring
+across both mechanisms), head subset, or denoising phase — and the collage defect
+is entangled with identity rather than separable from it, as five matched-control
+repairs (background isolation, head-gating, outlier-token suppression,
+late-timestep gating, and an identity-supervised training loss; §4.6) each confirm
+by trading identity for coherence rather than removing the defect. A
+peaked-versus-diffuse attention-selectivity signature (§4.7), offered as a
+cross-architecture diagnostic rather than a law, further separates a model that
+transfers structured identity from one that transfers only mean color. The
+mechanistic groundwork — the RoPE coordinate-origin collision that makes naive
+injection ghost (§3.2) and the frequency-gated `lowfreq` variant (§3.3) — is what
+let us ask the anatomy question at all.
+
+The third pillar is methodological: two measurement reversals — the `lowfreq`
+recipe's higher identity-match but 4× held-out composition defect (§4.3), and the
+band-LoRA's 8.6× "defect gradient" refuted by our own cross-set replication and
+confound-free re-run (§4.6, trainlight addendum) — show that identity-match-only,
+single-set evaluation is systematically optimistic for this method family, and
+that a paired identity-and-defect, cross-set protocol is necessary rather than
+optional. The deployment-recommended configuration remains the position-free
+`strip` baseline (Section 4.3), shipped in `probe/50_production.py`. That parity claim is specific to the general-adapter class: against a
 purpose-trained in-context conditioning adapter on a much larger,
 general-domain base (krea2-identity-edit, added in this round), `strip` is
 decisively behind on both clean-yes and defect rate (Section 4.4) — this

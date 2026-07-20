@@ -72,8 +72,12 @@ cross-set replicated: clean-yes identity is depth-uniform, and the
 band-LoRA stays statistically tied with krea2 on usable-output under a
 protocol-matched re-run. All submission surfaces (abstract, intro,
 results, limitations, conclusion) were rewritten 2026-07-16 to present
-the gradient as a refuted, fully-audited artifact — the audit trail is
-the contribution. A 2026-07-17 follow-up closed the remaining
+the gradient as a refuted, fully-audited artifact, and **again 2026-07-20
+to reframe the paper around the positive thesis** — one-shot identity is a
+*distributed, composition-entangled* attention code — with the two
+reversals (lowfreq held-out, withdrawn band gradient) demoted to a
+measurement-methodology pillar and the withdrawn gradient reported as one
+of five confirmatory-negative repairs under that thesis. A 2026-07-17 follow-up closed the remaining
 attribution gap with a completed checkpoint × prompt-prefix 2x2
 factorial (`data/cells3_summary.json`) and moved the paper's flagship
 krea2 comparison to a confound-free step6000 operating point (clean-yes
