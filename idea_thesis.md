@@ -1,5 +1,8 @@
 # Title
-Identity-match metrics hide composition-collapse risk: evidence from two unrelated conditioning mechanisms on a frozen anime T2I DiT
+*(Updated 2026-07-20 to the adopted positive-thesis framing; the prior
+measurement-hazard framing below is now the paper's third pillar, not its headline.)*
+
+**One-Shot Subject Identity Is a Distributed, Composition-Entangled Code in a Frozen Text-to-Image Transformer** — two cheap mechanisms (training-free KV injection, 0.06%-param band-LoRA) reach trained-adapter identity parity, yet no layer-band, head-subset, or timestep handle localizes identity, so all five matched-control repairs of its collage defect trade identity for coherence; identity-match-only evaluation hides this twice.
 
 ## Motivation
 Reference-image identity conditioning (feed a reference portrait, get the

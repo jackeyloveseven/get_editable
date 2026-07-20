@@ -1,6 +1,13 @@
 # Reframe thesis: identity in a frozen T2I DiT is a *distributed* representation
 *(2026-07-19 — the strongest positive, AAAI-shaped framing extractable from the existing evidence, no new GPU experiment required. Honest viability assessment at the end.)*
 
+> **ADOPTED 2026-07-20.** This reframe is now the paper's framing: the LaTeX
+> submission (`aaai_latex_submission/main_aaai.tex`), `draft_v0.md`, and
+> `idea_thesis.md` all lead with the distributed, composition-entangled thesis.
+> The head-null is now quantified (n=12 head-gate) and a fifth confirmatory
+> repair was added (n=60 identity-supervised training objective). Per strategic
+> review the venue call is: AAAI-27 as a low-cost submission (odds ~15–20% best-packaged), TMLR as the paper's home.
+
 ## The one-sentence contribution
 In a frozen, pure-T2I diffusion transformer, the identity information that
 attention-level reference injection activates is **not localized** — not to a

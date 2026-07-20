@@ -255,3 +255,18 @@ a clean-protocol step6000 operating point (76.7% [65,86] vs 58.3%
 [46,70], tie point-ahead — step4000 scores 53.3% [41,65] under the same
 protocol). The defect gradient, and the "band 10-25 minimizes collateral
 damage" interpretation built on it, are withdrawn.
+
+---
+
+**Addendum (2026-07-20): an identity-supervised objective does not fix the
+defect.** Testing whether the composition defect is a *training* deficiency:
+from a config-matched MSE-only baseline (band 10–25, r=8, mix3 manifest, 1500
+steps), two arms add one auxiliary loss and nothing else — a decode-space CCIP
+identity loss (w=0.05) and a perceptual loss (w=0.1). On the full held-out set
+(n=60/arm), neither helps: both leave clean-yes at or below the MSE baseline
+(16.7% → ccip 15.0% / perc 10.2%) while *raising* the defect rate (13.3% →
+26.7% / 40.7%). The most direct training-side repair moves the tradeoff the
+wrong way — the **fifth** matched-control repair (and the only training-side
+one) to trade identity for coherence rather than separate them, consistent with
+the distributed, composition-entangled account. Data:
+`data/gemini_judge_ho60_lora_pilot_{baseline,ccip,perc}.json`.
