@@ -1,0 +1,8 @@
+nature_reader/
+*.aux
+*.bbl
+*.blg
+*.log
+*.gz
+main_aaai_extracted.txt
+main_aaai_extracted_updated.txt
